@@ -8,5 +8,17 @@ namespace Tp_Finale
 {
     internal class Systeme
     {
+        public void ChargerDonnees()
+        {
+
+        }
+        public void SauvegarderDonnees()
+        {
+
+        }
+        public void ConnexionUtilisateur(string id)
+        {
+
+        }
     }
 }

@@ -8,5 +8,25 @@ namespace Tp_Finale
 {
     internal class Utilisateur
     {
+        public string Nom {  get; set; }
+        public string Prenom { get; set; }
+        public DateTime DateNaissance { get; set; }
+        public string Adresse { get; set; }
+        public Systeme Systemes { get; set; }
+        public Utilisateur(string nom,string prenom,DateTime dateNaissance,string adresse)
+        {
+            Nom = nom;
+            Prenom = prenom;
+            DateNaissance = dateNaissance;
+            Adresse = adresse;
+        }
+
+        public virtual void AfficherInfo()
+        {
+            Console.WriteLine($"Prenom : {Prenom}");
+            Console.WriteLine($"Nom : {Nom}");
+            Console.WriteLine($"date de naissance : {DateNaissance}");
+            Console.WriteLine($"Adresse : {Adresse}");
+        }
     }
 }
