@@ -8,9 +8,9 @@ namespace Tp_Finale
 {
     internal class Systeme
     {
-        public void ChargerDonnees()
+        public List<> ChargerDonnees()
         {
-
+            string[] Ligne = File.ReadAllLines("Donnees");
         }
         public void SauvegarderDonnees()
         {
