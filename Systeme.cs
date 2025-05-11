@@ -8,9 +8,12 @@ namespace Tp_Finale
 {
     internal class Systeme
     {
-        public List<> ChargerDonnees()
+        public Dictionary<int,List<string>> ChargerDonnees()
         {
-            string[] Ligne = File.ReadAllLines("Donnees");
+            var dictionnaire = new Dictionary<int, List<string>>();
+            string[] Ligne = File.ReadAllLines("Donnees.csv");
+            return dictionnaire;
+
         }
 
         public void SauvegarderDonnees()
@@ -20,7 +23,7 @@ namespace Tp_Finale
 
         public void ConnexionUtilisateur(string id)
         {
-
+            
         }
     }
 }
