@@ -12,7 +12,15 @@ namespace Tp_Finale
         {
             var dictionnaire = new Dictionary<int, List<string>>();
             string[] Ligne = File.ReadAllLines("Donnees.csv");
-            return dictionnaire;
+            int nombreLigne = Ligne.Length;
+            int nombreColonne = Ligne[0].Split(';').Length;
+            for (int i = 0; i < nombreLigne; i++)
+            {
+                for (int j = 0; j < nombreColonne; j++)
+                {
+                    
+                }
+            }
 
         }
 
