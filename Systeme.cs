@@ -9,6 +9,7 @@ namespace Tp_Finale
     internal class Systeme
     {
         public Dictionary<string, List<string>> dictionnaire {  get; set; }
+        public Dictionary<string, List<string>> dictionnaire2 { get; set; }
 
         public Dictionary<string,List<string>> ChargerDonnees()
         {
@@ -95,7 +96,7 @@ namespace Tp_Finale
                             {
                                 Console.WriteLine("Ce n'est pas le bon format!");
                             }
-                            List<string> list = dictionnaire[]
+                            List<string> list = dictionnaire[id];
                             break;
                         default:
                             break;
