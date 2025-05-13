@@ -9,6 +9,7 @@ namespace Tp_Finale
     internal class Systeme
     {
         public Dictionary<int, List<string>> dictionnaire {  get; set; }
+        
         public Dictionary<int,List<string>> ChargerDonnees()
         {
             int id = 0;
@@ -28,6 +29,10 @@ namespace Tp_Finale
                     }
 
                     dictionnaire[id] = donnees;
+                }
+                else
+                {
+
                 }
             }
 

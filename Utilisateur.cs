@@ -20,8 +20,9 @@ namespace Tp_Finale
             DateNaissance = dateNaissance;
             Adresse = adresse;
             Systemes = systeme;
+            systeme.ChargerDonnees();
         }
-
+        
         public virtual void AfficherInfo()
         {
             Console.WriteLine($"Prenom : {Prenom}");
