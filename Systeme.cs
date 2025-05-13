@@ -83,8 +83,6 @@ namespace Tp_Finale
                     Observateur observateur = new Observateur(id,nom, prenom, DateTime.Parse(valeurs[1]), "233 rue djdd");
                     observateur.AfficherInfo();
                     string mo = observateur.Choix();
-                    
-                    
                 }
             }
         }

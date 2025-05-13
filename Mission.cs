@@ -12,12 +12,23 @@ namespace Tp_Finale
         public string NomMission { get; set; }
         public string Destination { get; set; }
         public DateTime DateLancement { get; set; }
-        public int dureeEstimee {  get; set; }
+        public int DureeEstimee {  get; set; }
         public string VaisseauSpatial { get; set; }
         public string Categorie {  get; set; }
         public Scientifique scientifique { get; set; }
         public List<ObjetCeleste> ObjetsCelestes { get; set; }
         public List<Instrument> Instruments { get; set; }
+        public Systeme systeme {  get; set; }
+        public Mission(string referenceMission,string nomMission,string destination,DateTime dateLancement,int dureeEstimee,string vaisseauSpatial,string categorie)
+        {
+            this.referenceMission = referenceMission;
+            this.NomMission = nomMission;
+            this.Destination = destination;
+            this.DateLancement = dateLancement;
+            this.DureeEstimee = dureeEstimee;
+            this.VaisseauSpatial = vaisseauSpatial;
+            this.Categorie = categorie;
+        }
 
     }
 }
