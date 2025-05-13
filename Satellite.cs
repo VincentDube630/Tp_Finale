@@ -8,9 +8,15 @@ namespace Tp_Finale
 {
     internal class Satellite:ObjetCeleste
     {
+        public Satellite(string nomObjet, int masse, string type) : base(nomObjet, masse, "Satelitte") { }
+
         public override void CalculerVitesseGravitationelle()
         {
             Console.WriteLine("d");
+        }
+        public override void CalculerVitesseOrbitale()
+        {
+
         }
     }
 }

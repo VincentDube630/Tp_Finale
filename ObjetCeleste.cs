@@ -12,6 +12,12 @@ namespace Tp_Finale
         public string NomObjet {  get; set; }
         public double Masse {  get; set; }
         public string Categorie {  get; set; }
+        public ObjetCeleste(string nomObjet,double masse, string categorie)
+        {
+            NomObjet = nomObjet;
+            Masse = masse;
+            Categorie = categorie;
+        }
         public abstract void CalculerVitesseGravitationelle();
         public abstract void CalculerVitesseOrbitale();
     }

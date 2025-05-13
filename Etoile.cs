@@ -8,9 +8,15 @@ namespace Tp_Finale
 {
     internal class Etoile:ObjetCeleste
     {
+
+        public Etoile(string nomObjet, int masse, string type) : base(nomObjet, masse, "Etoile") { }
         public override void CalculerVitesseGravitationelle()
         {
             Console.WriteLine("d");
+        }
+        public override void CalculerVitesseOrbitale()
+        {
+
         }
     }
 }
