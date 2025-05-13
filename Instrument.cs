@@ -11,6 +11,13 @@ namespace Tp_Finale
         public string IdInstrument { get; set; }
         public string NomInstrument {  get; set; }
         public string Categorie {  get; set; }
-        public Instrument() { }
+        public Systeme Systemes { get; set; }
+
+        public Instrument(string idInstrument, string nomInstrument,string Categorie) 
+        {
+            this.IdInstrument = idInstrument;
+            this.NomInstrument = nomInstrument;
+            this.Categorie = Categorie;
+        }
     }
 }

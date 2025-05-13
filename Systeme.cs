@@ -79,14 +79,23 @@ namespace Tp_Finale
                 }
                 else
                 {
-
                     Observateur observateur = new Observateur(id,nom, prenom, DateTime.Parse(valeurs[1]), "233 rue djdd");
                     observateur.AfficherInfo();
                     string mo = observateur.Choix();
                     switch (mo)
                     {
                         case "RM":
-
+                            Console.WriteLine("Numéro de référence : ");
+                            string numeroReference = "";
+                            try
+                            {
+                                numeroReference=Console.ReadLine();
+                            }
+                            catch(FormatException)
+                            {
+                                Console.WriteLine("Ce n'est pas le bon format!");
+                            }
+                            List<string> list = dictionnaire[]
                             break;
                         default:
                             break;
