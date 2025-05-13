@@ -12,6 +12,7 @@ namespace Tp_Finale
         public string NomObjet {  get; set; }
         public double Masse {  get; set; }
         public string Categorie {  get; set; }
+        public Systeme systeme { get; set; }
         public ObjetCeleste(string nomObjet,double masse, string categorie)
         {
             NomObjet = nomObjet;

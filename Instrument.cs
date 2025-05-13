@@ -8,5 +8,9 @@ namespace Tp_Finale
 {
     internal class Instrument
     {
+        public string IdInstrument { get; set; }
+        public string NomInstrument {  get; set; }
+        public string Categorie {  get; set; }
+        public Instrument() { }
     }
 }

@@ -25,6 +25,7 @@ namespace Tp_Finale
         public void SuprimmerMission(Mission mission)
         {
             Missions.Remove(mission);
+            Console.WriteLine($"la mission {mission} a bien été suprimmer");
         }
         public void AjouterInstrument(Instrument instrument)
         {

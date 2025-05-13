@@ -9,7 +9,7 @@ namespace Tp_Finale
     internal class Observateur:Utilisateur
     {
         public string IdObservateur {  get; set; }
-        public Observateur(string idObservateur,string nom,string prenom,DateTime dateNaissance,string adresse,Systeme systeme):base(nom,prenom,dateNaissance,adresse,systeme)
+        public Observateur(string idObservateur,string nom,string prenom,DateTime dateNaissance,string adresse):base(nom,prenom,dateNaissance,adresse)
         {
             IdObservateur = idObservateur;
         }
@@ -21,8 +21,15 @@ namespace Tp_Finale
             Console.WriteLine();
             Console.WriteLine("Option Observateur : ");
             Console.Write("Veuillez fournir le numéro d'identification ----> ");
-            string id1 = Console.ReadLine();
-            int id = Convert.ToInt32(id1);
+            try
+            {
+                string id1 = Console.ReadLine();
+                int id = Convert.ToInt32(id1);
+            }
+            catch
+            {
+                int id = Convert.ToInt32(id1);
+            }
 
             return id;
         }

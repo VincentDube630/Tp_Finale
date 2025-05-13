@@ -13,14 +13,13 @@ namespace Tp_Finale
         public DateTime DateNaissance { get; set; }
         public string Adresse { get; set; }
         public Systeme Systemes { get; set; }
-        public Utilisateur(string nom,string prenom,DateTime dateNaissance,string adresse,Systeme systeme)
+        
+        public Utilisateur(string nom,string prenom,DateTime dateNaissance,string adresse)
         {
             Nom = nom;
             Prenom = prenom;
             DateNaissance = dateNaissance;
             Adresse = adresse;
-            Systemes = systeme;
-            systeme.ChargerDonnees();
         }
         
         public virtual void AfficherInfo()
