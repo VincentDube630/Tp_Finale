@@ -9,7 +9,7 @@ namespace Tp_Finale
     internal class Observateur:Utilisateur
     {
         public string IdObservateur {  get; set; }
-        public Observateur(string idObservateur,string nom,string prenom,DateTime dateNaissance,string adresse):base(nom,prenom,dateNaissance,adresse)
+        public Observateur(string idObservateur,string nom,string prenom,DateTime dateNaissance,string adresse,Systeme systeme):base(nom,prenom,dateNaissance,adresse,systeme)
         {
             IdObservateur = idObservateur;
         }

@@ -8,5 +8,9 @@ namespace Tp_Finale
 {
     internal class Satellite:ObjetCeleste
     {
+        public override void CalculerVitesseGravitationelle()
+        {
+            Console.WriteLine("d");
+        }
     }
 }

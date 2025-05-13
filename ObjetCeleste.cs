@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace Tp_Finale
 {
     internal abstract class ObjetCeleste
     {
+        public string NomObjet {  get; set; }
+        public double Masse {  get; set; }
+        public string Categorie {  get; set; }
+        public abstract void CalculerVitesseGravitationelle();
+        public abstract void CalculerVitesseOrbitale();
     }
 }

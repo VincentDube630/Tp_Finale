@@ -8,5 +8,9 @@ namespace Tp_Finale
 {
     internal class Etoile:ObjetCeleste
     {
+        public override void CalculerVitesseGravitationelle()
+        {
+            Console.WriteLine("d");
+        }
     }
 }

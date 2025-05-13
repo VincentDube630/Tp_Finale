@@ -8,25 +8,35 @@ namespace Tp_Finale
 {
     internal class Systeme
     {
+        public Dictionary<int, List<string>> dictionnaire {  get; set; }
         public Dictionary<int,List<string>> ChargerDonnees()
         {
-            var dictionnaire = new Dictionary<int, List<string>>();
+            int id = 0;
+            dictionnaire = new Dictionary<int, List<string>>();
             string[] Ligne = File.ReadAllLines("Donnees.csv");
-            int nombreLigne = Ligne.Length;
-            int nombreColonne = Ligne[0].Split(';').Length;
-            for (int i = 0; i < nombreLigne; i++)
+            
+            foreach (var lignes in Ligne)
             {
-                for (int j = 0; j < nombreColonne; j++)
+                var ligness = lignes.Split(';');
+                if (int.TryParse(ligness[0], out id))
                 {
-                    
+                    var donnees = new List<string>();
+
+                    for (int i = 1; i < ligness.Length; i++)
+                    {
+                        donnees.Add(ligness[i]);
+                    }
+
+                    dictionnaire[id] = donnees;
                 }
             }
 
+            return dictionnaire;
         }
 
         public void SauvegarderDonnees()
         {
-
+            
         }
 
         public void ConnexionUtilisateur(string id)
