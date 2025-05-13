@@ -16,6 +16,7 @@ namespace Tp_Finale
         
         public Utilisateur(string nom,string prenom,DateTime dateNaissance,string adresse)
         {
+            Systemes.ChargerDonnees();
             Nom = nom;
             Prenom = prenom;
             DateNaissance = dateNaissance;
