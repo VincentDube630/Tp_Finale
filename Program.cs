@@ -16,24 +16,26 @@
             Console.WriteLine("Quitter (Q)");
             Console.WriteLine();
             string choix = Console.ReadLine();
-            if (choix == "Q")
+            switch (choix)
             {
-                return;
-            }
-            if(choix == "O")
-            {
-                Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-                Console.WriteLine("                         Simulation des \n                         missions spatiales");
-                Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-                Console.WriteLine();
-                Console.WriteLine("Option Observateur : ");
-                Console.Write("Veuillez fournir le numéro d'identification ----> ");
-                string id1 = Console.ReadLine();
-                systeme.ConnexionUtilisateur(id1);
-            }
-            if(choix == "S")
-            {
-
+                case "O":
+                    Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                    Console.WriteLine("                         Simulation des \n                         missions spatiales");
+                    Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                    Console.WriteLine();
+                    Console.WriteLine("Option Observateur : ");
+                    Console.Write("Veuillez fournir le numéro d'identification ----> ");
+                    string id1 = Console.ReadLine();
+                    systeme.ConnexionUtilisateur(id1);
+                    break;
+                case "S":
+                    break;
+                case "Q":
+                    Environment.ExitCode = 0;
+                    break;
+                default:
+                    Console.WriteLine("Choix invalide!");
+                    break;
             }
         }
     }
