@@ -15,6 +15,7 @@ namespace Tp_Finale
         public int dureeEstimee {  get; set; }
         public string VaisseauSpatial { get; set; }
         public string Categorie {  get; set; }
+        public Scientifique scientifique { get; set; }
 
     }
 }

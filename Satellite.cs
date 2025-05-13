@@ -12,7 +12,7 @@ namespace Tp_Finale
 
         public override void CalculerVitesseGravitationelle()
         {
-            Console.WriteLine("d");
+            
         }
         public override void CalculerVitesseOrbitale()
         {

@@ -36,11 +36,11 @@ namespace Tp_Finale
         }
         public void AjouterObservateur(Observateur observateur)
         {
-
+             
         }
         public void AjouterScientifique(Scientifique scientifique )
         {
-
+            
         }
         public override void AfficherInfo()
         {
