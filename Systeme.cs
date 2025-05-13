@@ -32,14 +32,14 @@ namespace Tp_Finale
 
                     if (ligness.Length >= 1)
                     {
-                        string cle = ligness[0].Trim();
+                        string cleValeur = ligness[0].Trim();
                         var valeurs = new List<string>();
 
                         for (int i = 1; i < ligness.Length; i++)
                         {
                             valeurs.Add(ligness[i].Trim());
                         }
-                        dictionnaire[cle] = valeurs;
+                        dictionnaire[cleValeur] = valeurs;
                     }
                 }
 
