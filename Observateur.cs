@@ -13,26 +13,7 @@ namespace Tp_Finale
         {
             IdObservateur = idObservateur;
         }
-        public int DemanderId()
-        {
-            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-            Console.WriteLine("                         Simulation des \n                         missions spatiales");
-            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-            Console.WriteLine();
-            Console.WriteLine("Option Observateur : ");
-            Console.Write("Veuillez fournir le numéro d'identification ----> ");
-            try
-            {
-                string id1 = Console.ReadLine();
-                int id = Convert.ToInt32(id1);
-            }
-            catch
-            {
-                int id = Convert.ToInt32(id1);
-            }
-
-            return id;
-        }
+        
         public override void AfficherInfo()
         {
             Console.WriteLine("Profil d'observateur : ");
@@ -40,6 +21,31 @@ namespace Tp_Finale
             Console.WriteLine($"Id observateur : {IdObservateur}");
             base.AfficherInfo();
             
+        }
+        public string Choix()
+        {
+            Console.WriteLine("Recherche d'une mission (RM) : ");
+            Console.WriteLine("Liste des missions (LM) : ");
+            Console.WriteLine("Recherche un scientifique (RS) : ");
+            Console.WriteLine("Liste des scientifiques (LS) : ");
+            Console.WriteLine("Liste des instruments de mesure (LI) : ");
+            string choix = "";
+            bool recommencer = true;
+            do
+            {
+                try
+                {
+                    choix = Console.ReadLine();
+                    recommencer = true;
+                }
+                catch (FormatException)
+                {
+                    recommencer = false;
+                    Console.WriteLine("Erreur, ce n'est pas une chaine de caractère");
+                }
+            } while (!recommencer);       
+            return Choix();
+           
         }
 
     }

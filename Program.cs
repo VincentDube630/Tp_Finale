@@ -5,6 +5,7 @@
         static void Main(string[] args)
         {
             Systeme systeme = new Systeme();
+            systeme.ChargerDonnees();
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
             Console.WriteLine("                         Simulation des \n                         missions spatiales");
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
@@ -28,8 +29,7 @@
                 Console.WriteLine("Option Observateur : ");
                 Console.Write("Veuillez fournir le numéro d'identification ----> ");
                 string id1 = Console.ReadLine();
-                int id = Convert.ToInt32(id1);
-                Observateur observateur = new Observateur();
+                systeme.ConnexionUtilisateur(id1);
             }
             if(choix == "S")
             {

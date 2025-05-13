@@ -8,87 +8,88 @@ namespace Tp_Finale
 {
     internal class Systeme
     {
-        public Dictionary<int, List<string>> dictionnaireUtilisateur {  get; set; }
-        public Dictionary<string, List<string>> dictionnaireMission {  get; set; }
+        public Dictionary<string, List<string>> dictionnaire {  get; set; }
 
-        public Dictionary<int,List<string>> ChargerDonnees()
+        public Dictionary<string,List<string>> ChargerDonnees()
         {
-            int id = 0;
-            string nom = "";
-            dictionnaireUtilisateur = new Dictionary<int, List<string>>();
-            string[] Ligne = File.ReadAllLines("Donnees.csv");
+            dictionnaire = new Dictionary<string, List<string>>();
+            string cheminFichier = "Donnees.csv";
             
-            foreach (var lignes in Ligne)
+
+            if (File.Exists(cheminFichier))
             {
-                var ligness = lignes.Split(';');
-                if (int.TryParse(ligness[0], out id))
-                {
-                    var donnees = new List<string>();
+                string[] lignes = File.ReadAllLines(cheminFichier);
 
-                    for (int i = 1; i < ligness.Length; i++)
+                foreach (string ligne in lignes)
+                {
+                    if (string.IsNullOrWhiteSpace(ligne))
                     {
-                        donnees.Add(ligness[i]);
+                        continue;
                     }
+                        
 
-                    dictionnaireUtilisateur[id] = donnees;
+                    string[] ligness = ligne.Split(';');
+
+                    if (ligness.Length >= 1)
+                    {
+                        string cle = ligness[0].Trim();
+                        var valeurs = new List<string>();
+
+                        for (int i = 1; i < ligness.Length; i++)
+                        {
+                            valeurs.Add(ligness[i].Trim());
+                        }
+                        dictionnaire[cle] = valeurs;
+                    }
                 }
-                else
-                {
-                    
-                }
+
             }
-
-            return dictionnaireUtilisateur;
+            else
+            {
+                Console.WriteLine("Fichier introuvable");
+            }
+            return dictionnaire;
         }
-
         public void SauvegarderDonnees()
         {
-            
+
         }
 
         public void ConnexionUtilisateur(string id)
         {
-            if (dictionnaireUtilisateur.ContainsKey(Convert.ToInt32(id)) == false)
+            if (dictionnaire.ContainsKey(id) == false)
             {
                 Console.WriteLine("Il n'y a pas d'observateur qui possèdent ce numéro d'indentification.");
             }
             else
             {
+                List<string> valeurs = dictionnaire[id];
+                string nomComplet = valeurs[0];
+                string[] nomGauche = nomComplet.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                string prenom = "";
+                string nom = "";
+                if (nomGauche.Length >= 2)
+                {
+                    prenom = nomGauche[0];
+                    nom = string.Join(" ", nomGauche.Skip(1)); // Si Nom de famille avec espace
+                }    
+                if (!string.IsNullOrWhiteSpace(valeurs[2])) // Si il y a des données a la valeur 3 du la liste a l'id donnée alors ce n'est pas un observateur mais un scientifique
+                {
+                    Console.WriteLine("Ce numéro n'est pas un observateur");
+                }
+                else
+                {
 
-            }
-        }
-        public void DemanderChoix()
-        {
-            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-            Console.WriteLine("                         Simulation des \n                         missions spatiales");
-            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-            Console.WriteLine();
-            Console.WriteLine("Choissisez une option : ");
-            Console.WriteLine("Observateur (O)");
-            Console.WriteLine("Scientifique (S)");
-            Console.WriteLine("Quitter (Q)");
-            Console.WriteLine();
-            string choix = Console.ReadLine();
-            if (choix == "Q")
-            {
-                return;
-            }
-            if (choix == "O")
-            {
-                Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-                Console.WriteLine("                         Simulation des \n                         missions spatiales");
-                Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-                Console.WriteLine();
-                Console.WriteLine("Option Observateur : ");
-                Console.Write("Veuillez fournir le numéro d'identification ----> ");
-                string id1 = Console.ReadLine();
-                int id = Convert.ToInt32(id1);
-                Observateur observateur = new Observateur(dictionnaireUtilisateur[id]);
-            }
-            if (choix == "S")
-            {
-
+                    Observateur observateur = new Observateur(id,nom, prenom, DateTime.Parse(valeurs[1]), "233 rue djdd");
+                    observateur.AfficherInfo();
+                    string mo = observateur.Choix();
+                    
+                    
+                }
             }
         }
     }
 }
+
+       
+
