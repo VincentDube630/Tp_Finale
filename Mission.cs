@@ -16,6 +16,8 @@ namespace Tp_Finale
         public string VaisseauSpatial { get; set; }
         public string Categorie {  get; set; }
         public Scientifique scientifique { get; set; }
+        public List<ObjetCeleste> ObjetsCelestes { get; set; }
+        public List<Instrument> Instruments { get; set; }
 
     }
 }

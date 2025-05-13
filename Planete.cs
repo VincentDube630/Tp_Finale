@@ -12,7 +12,7 @@ namespace Tp_Finale
         public Planete(string nomObjet, int masse, string type) : base(nomObjet, masse, "Planete") { }
         public override void CalculerVitesseGravitationelle()
         {
-            Console.WriteLine("d");
+            
         }
         public override void CalculerVitesseOrbitale()
         {

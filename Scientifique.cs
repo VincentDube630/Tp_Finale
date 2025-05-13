@@ -12,15 +12,15 @@ namespace Tp_Finale
         public string Matricule { get; set; }
         public List<Mission> Missions { get; set; }
 
-        public Scientifique(string matricule, string nom, string prenom, DateTime dateNaissance, string adresse,Systeme systeme,Mission mission) : base(nom, prenom, dateNaissance, adresse,systeme)
+        public Scientifique(string matricule, string nom, string prenom, DateTime dateNaissance, string adresse) : base(nom, prenom, dateNaissance, adresse)
         {
             Matricule = matricule;
-            Missions = new List<Mission>();
         }
 
         public void AjouterMission(Mission mission)
         {
             Missions.Add(mission);
+            Console.WriteLine($"La mission {mission} a bien été ajouté");
         }
         public void SuprimmerMission(Mission mission)
         {
