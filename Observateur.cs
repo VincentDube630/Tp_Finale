@@ -22,31 +22,7 @@ namespace Tp_Finale
             base.AfficherInfo();
             
         }
-        public string Choix()
-        {
-            Console.WriteLine("Recherche d'une mission (RM) : ");
-            Console.WriteLine("Liste des missions (LM) : ");
-            Console.WriteLine("Recherche un scientifique (RS) : ");
-            Console.WriteLine("Liste des scientifiques (LS) : ");
-            Console.WriteLine("Liste des instruments de mesure (LI) : ");
-            string choix = "";
-            bool recommencer = true;
-            do
-            {
-                try
-                {
-                    choix = Console.ReadLine();
-                    recommencer = true;
-                }
-                catch (FormatException)
-                {
-                    recommencer = false;
-                    Console.WriteLine("Erreur, ce n'est pas une chaine de caractère");
-                }
-            } while (!recommencer);       
-            return Choix();
-           
-        }
+      
 
     }
 }

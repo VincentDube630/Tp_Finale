@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace Tp_Finale
 
             if (File.Exists(cheminFichier))
             {
-                foreach (var ligne in File.ReadLines(cheminFichier).Take(35))
+                foreach (var ligne in File.ReadLines(cheminFichier))
                 {
                     string[] donnees = ligne.Split(';');
 
@@ -26,6 +27,7 @@ namespace Tp_Finale
                         var valeurs = new List<string>();
                         var listeObservateur = new List<string>(); // Liste qui va avec la clée du dictionnaire pour les observateurs
                         var listeScientifique = new List<string>(); // Liste pour les scientifiques
+                        var listMission = new List<string>();
                         string cleValeur;
 
                         // Ajout des valeurs dans une liste générale
@@ -43,9 +45,25 @@ namespace Tp_Finale
                             // Ajouter au dictionnaire
                             Systeme.dictionnaire.Add(cleValeur, listeObservateur);
 
-                        }else if =awadwdzx<<000....w
+                        }
+                        if (valeurs[5]!="")
+                        {
+                            cleValeur=valeurs[1];
+                            listMission.Add(valeurs[0]); // Le nom de la mission devient 0
+                            listMission.Add(valeurs[2]);//Le matricule du scientifique devient le numero 1
+                            listMission.Add(valeurs[3]);//la catégorie devient le numero 2
+                            listMission.Add(valeurs[4]);// le vaisseau devient le 3
+                            listMission.Add(valeurs[5]);// la duree devient le 4
+                            listMission.Add(valeurs[6]);// La date de lancement devient le 5
+                            if (!Systeme.dictionnaire.ContainsKey(cleValeur))
+                            {
+                                Systeme.dictionnaire.Add(cleValeur, listMission);
+
+                            }
+
+                        }
                         // Si scientifique
-                        else 
+                        if (valeurs[5] == "" && valeurs[3]!="") 
                         {
                             cleValeur = valeurs[3];
                             listeScientifique.Add(valeurs[1]); // Deviens le nom en 0
@@ -109,7 +127,26 @@ namespace Tp_Finale
                 {
                     Observateur observateur = new Observateur(id,nom, prenom, DateTime.Parse(valeurs[1]), "233 rue djdd");
                     observateur.AfficherInfo();
-                    string mo = observateur.Choix();
+                    Console.WriteLine("Recherche d'une mission (RM) : ");
+                    Console.WriteLine("Liste des missions (LM) : ");
+                    Console.WriteLine("Recherche un scientifique (RS) : ");
+                    Console.WriteLine("Liste des scientifiques (LS) : ");
+                    Console.WriteLine("Liste des instruments de mesure (LI) : ");
+                    string mo = "";
+                    bool recommencer = true;
+                    do
+                    {
+                        try
+                        {
+                            mo = Console.ReadLine();
+                            recommencer = true;
+                        }
+                        catch (FormatException)
+                        {
+                            recommencer = false;
+                            Console.WriteLine("Erreur, ce n'est pas une chaine de caractère");
+                        }
+                    } while (!recommencer);
                     switch (mo)
                     {
                         case "RM":
@@ -123,8 +160,25 @@ namespace Tp_Finale
                             {
                                 Console.WriteLine("Ce n'est pas le bon format!");
                             }
-                            List<string> list = dictionnaire2[numeroReference];
-                            Console.WriteLine(dictionnaire2[numeroReference]); 
+                            if (dictionnaire.ContainsKey(numeroReference) == false)
+                            {
+                                Console.WriteLine("Il n'y a pas de numéro de mission correspodant");
+                            }
+                            else
+                            {
+                                List<string> valeurs1 = dictionnaire[numeroReference];
+                                Mission mission = new Mission(numeroReference, valeurs1[0], DateTime.Parse(valeurs1[5]), int.Parse(valeurs1[4]), valeurs1[3], valeurs1[2]);
+                                mission.AfficherInfo();
+                                Console.WriteLine();
+                                Console.WriteLine();
+                                Console.Write("Revenir au menu princiaple : ");
+                                string revenir = Console.ReadLine();
+                                ConnexionUtilisateur(id);
+                                
+                            }
+                            break;
+                        case "LM":
+                            if(dictionnaire.ContainsKey(*))
                             break;
                         default:
                             break;
