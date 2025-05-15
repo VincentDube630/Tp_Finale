@@ -8,14 +8,14 @@ namespace Tp_Finale
 {
     internal class Instrument
     {
-        public string IdInstrument { get; set; }
+        public string IdMission { get; set; }
         public string NomInstrument {  get; set; }
         public string Categorie {  get; set; }
         public Systeme Systemes { get; set; }
 
-        public Instrument(string idInstrument, string nomInstrument,string Categorie) 
+        public Instrument(string idMission, string nomInstrument,string Categorie) 
         {
-            this.IdInstrument = idInstrument;
+            this.IdMission = idMission;
             this.NomInstrument = nomInstrument;
             this.Categorie = Categorie;
         }

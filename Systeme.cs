@@ -10,7 +10,7 @@ namespace Tp_Finale
     internal class Systeme
     {
         public static Dictionary<string, List<string>> dictionnaire { get; set; } = new Dictionary<string, List<string>>();
-        public Dictionary<string, List<string>> dictionnaire2 { get; set; }
+        public static Dictionary<string, List<string>> dictionnaireInstruments { get; set; }
 
         public static void ChargerDonnees()
         {
@@ -84,7 +84,7 @@ namespace Tp_Finale
             {
                 Console.WriteLine("Fichier introuvable");
             }
-            string cheminFichier1=;
+            string cheminFichier1="InstrumentMesures";
 
             if (File.Exists(cheminFichier))
             {
@@ -95,9 +95,8 @@ namespace Tp_Finale
                     if (donnees.Length >= 1)
                     {
                         var valeurs = new List<string>();
-                        var listeObservateur = new List<string>(); // Liste qui va avec la clée du dictionnaire pour les observateurs
-                        var listeScientifique = new List<string>(); // Liste pour les scientifiques
-                        var listMission = new List<string>();
+                        var listeInstrumentsAnalyse = new List<string>(); // Liste qui va avec la clée du dictionnaire pour tous les instruments analyse
+                        var listeInstrumentsObservation = new List<string>();// Liste qui va avec la cle du dictionnaire pour tous les instruments observation
                         string cleValeur;
 
                         // Ajout des valeurs dans une liste générale
@@ -105,48 +104,22 @@ namespace Tp_Finale
                         {
                             valeurs.Add(donnees[i]);
                         }
-                        // Si observateur
-                        if (valeurs[3] == "")
+                        if (valeurs[3]!="")
                         {
-                            cleValeur = donnees[0];
-                            listeObservateur.Add(valeurs[1]); // Deviens le nom en 0
-                            listeObservateur.Add(valeurs[2]); // Deviens date naissance en 1
-
-                            // Ajouter au dictionnaire
-                            Systeme.dictionnaire.Add(cleValeur, listeObservateur);
-
+                            cleValeur = valeurs[0];
+                            listeInstrumentsObservation.Add(valeurs[1]);
+                            listeInstrumentsObservation.Add(valeurs[2]);
+                            listeInstrumentsObservation.Add(valeurs[3]);
+                            Systeme.dictionnaireInstruments.Add(cleValeur, listeInstrumentsObservation);
                         }
-                        if (valeurs[5] != "")
+                        else
                         {
-                            cleValeur = valeurs[1];
-                            listMission.Add(valeurs[0]); // Le nom de la mission devient 0
-                            listMission.Add(valeurs[2]);//Le matricule du scientifique devient le numero 1
-                            listMission.Add(valeurs[3]);//la catégorie devient le numero 2
-                            listMission.Add(valeurs[4]);// le vaisseau devient le 3
-                            listMission.Add(valeurs[5]);// la duree devient le 4
-                            listMission.Add(valeurs[6]);// La date de lancement devient le 5
-                            if (!Systeme.dictionnaire.ContainsKey(cleValeur))
-                            {
-                                Systeme.dictionnaire.Add(cleValeur, listMission);
-
-                            }
-
+                            cleValeur=valeurs[0];
+                            listeInstrumentsAnalyse.Add(valeurs[1]);
+                            listeInstrumentsAnalyse.Add(valeurs[2]);
+                            Systeme.dictionnaireInstruments.Add(cleValeur,listeInstrumentsAnalyse);
                         }
-                        // Si scientifique
-                        if (valeurs[5] == "" && valeurs[3] != "")
-                        {
-                            cleValeur = valeurs[3];
-                            listeScientifique.Add(valeurs[1]); // Deviens le nom en 0
-                            listeScientifique.Add(valeurs[2]); // Deviens date naissance en 1
-                            listeScientifique.Add(valeurs[4]); // Deviens la fonction (ingénieur...) en 2
 
-                            // Ajouter au dictionnaire
-
-                            if (!Systeme.dictionnaire.ContainsKey(cleValeur))
-                            {
-                                Systeme.dictionnaire.Add(cleValeur, listeScientifique);
-                            }
-                        }
                     }
                 }
             }
@@ -254,6 +227,38 @@ namespace Tp_Finale
                         case "LS":
                             break;
                         case "LI":
+                            Console.WriteLine("Numéro de référence : ");
+                            numeroReference = "";
+                            try
+                            {
+                                numeroReference = Console.ReadLine();
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine("Ce n'est pas le bon format!");
+                            }
+                            if (dictionnaire.ContainsKey(numeroReference) == false)
+                            {
+                                Console.WriteLine("Il n'y a pas de numéro de mission correspodant");
+                            }
+                            else
+                            {
+                                List<string> valeurs1 = dictionnaire[numeroReference];
+                                if (valeurs1[3] != "")
+                                {
+                                    
+                                }
+                                else
+                                {
+                                    
+                                }
+                                Console.WriteLine();
+                                Console.WriteLine();
+                                Console.Write("Revenir au menu princiaple : ");
+                                string revenir = Console.ReadLine();
+                                ConnexionUtilisateur(id);
+
+                            }
                             break;
                         default:
 

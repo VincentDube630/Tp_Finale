@@ -14,7 +14,12 @@ namespace Tp_Finale
         {
             this.ChampsVision = champsVision;
             this.LongeurOnde = longueurOnde;
-
         }
+
+        public void AfficherInfo()
+        {
+            Console.WriteLine($"Champs de vision : {ChampsVision}");
+            Console.WriteLine($"Longueur d'onde : {LongeurOnde}");
+        } 
     }
 }

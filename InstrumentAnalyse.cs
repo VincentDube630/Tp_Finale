@@ -10,5 +10,10 @@ namespace Tp_Finale
     {
         public string TypeSignale {  get; set; }
         public InstrumentAnalyse(string idInstruement, string nomInstrument, string typeSignale) : base(idInstruement, nomInstrument, "Analyse") { this.TypeSignale = typeSignale; }
+
+        public void AfficherInfo()
+        {
+            Console.WriteLine($"Type de signale : {TypeSignale}");
+        }
     }
 }
