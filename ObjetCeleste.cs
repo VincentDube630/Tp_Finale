@@ -24,7 +24,6 @@ namespace Tp_Finale
             Mission = mission;
             NomObjet = nomObjet;
             Masse = masse;
-            Categorie = categorie;
             DateDebut = dateDebut;
             Rayon = rayon;
         }

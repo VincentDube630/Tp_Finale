@@ -144,44 +144,44 @@ namespace Tp_Finale
                 {
                     string[] donnees = ligne.Split(';');
 
-                    if (donnees.Length >= 1)
-                    {
-                        var valeurs = new List<string>();
-                        var listePlante = new List<string>(); // Liste qui va avec la clée du dictionnaire pour tous les objets planete
-                        var listeSatelitte = new List<string>(); // Liste qui va avec la clée du dictionnaire pour tous les objets satelitte
-                        var listeEtoile = new List<string>(); // Liste qui va avec la clée du dictionnaire pour tous les objets etoile
-                        string cleValeur;
+                    //if (donnees.Length >= 1)
+                    //{
+                    //    var valeurs = new List<string>();
+                    //    var listePlante = new List<string>(); // Liste qui va avec la clée du dictionnaire pour tous les objets planete
+                    //    var listeSatelitte = new List<string>(); // Liste qui va avec la clée du dictionnaire pour tous les objets satelitte
+                    //    var listeEtoile = new List<string>(); // Liste qui va avec la clée du dictionnaire pour tous les objets etoile
+                    //    string cleValeur;
 
-                        // Ajout des valeurs dans une liste générale
-                        for (int i = 0; i < donnees.Length; i++)
-                        {
-                            valeurs.Add(donnees[i]);
-                        }
-                        if (valeurs[6] != "")
-                        {
-                            cleValeur = valeurs[1];
-                            listePlante.Add(valeurs[1]);
-                            listeInstrumentsObservation.Add(valeurs[2]);
-                            listeInstrumentsObservation.Add(valeurs[3]);
-                            if (!Systeme.dictionnaireInstruments.ContainsKey(cleValeur))
-                            {
-                                Systeme.dictionnaireInstruments.Add(cleValeur, listeInstrumentsObservation);
+                    //    // Ajout des valeurs dans une liste générale
+                    //    for (int i = 0; i < donnees.Length; i++)
+                    //    {
+                    //        valeurs.Add(donnees[i]);
+                    //    }
+                    //    if (valeurs[6] != "")
+                    //    {
+                    //        cleValeur = valeurs[1];
+                    //        listePlante.Add(valeurs[1]);
+                    //        listeInstrumentsObservation.Add(valeurs[2]);
+                    //        listeInstrumentsObservation.Add(valeurs[3]);
+                    //        if (!Systeme.dictionnaireInstruments.ContainsKey(cleValeur))
+                    //        {
+                    //            Systeme.dictionnaireInstruments.Add(cleValeur, listeInstrumentsObservation);
 
-                            }
-                        }
-                        else
-                        {
-                            cleValeur = valeurs[0];
-                            listeInstrumentsAnalyse.Add(valeurs[1]);
-                            listeInstrumentsAnalyse.Add(valeurs[2]);
-                            if (!Systeme.dictionnaireInstruments.ContainsKey(cleValeur))
-                            {
-                                Systeme.dictionnaireInstruments.Add(cleValeur, listeInstrumentsAnalyse);
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        cleValeur = valeurs[0];
+                    //        listeInstrumentsAnalyse.Add(valeurs[1]);
+                    //        listeInstrumentsAnalyse.Add(valeurs[2]);
+                    //        if (!Systeme.dictionnaireInstruments.ContainsKey(cleValeur))
+                    //        {
+                    //            Systeme.dictionnaireInstruments.Add(cleValeur, listeInstrumentsAnalyse);
 
-                            }
-                        }
+                    //        }
+                    //    }
 
-                    }
+                    //}
                 }
             }
             else
