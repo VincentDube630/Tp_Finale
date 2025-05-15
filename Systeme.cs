@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Tp_Finale
@@ -201,7 +203,48 @@ namespace Tp_Finale
                 }
                 else if (valeurs[7] == "")
                 {
-                    ObjetCeleste etoile = new Etoile(valeurs[0], valeurs[1], valeurs[2], valeurs[3], double.Parse(valeurs[4]), double.Parse((valeurs[5])), double.Parse(valeurs[6]));
+                    string texte = valeurs[4];
+                    texte = texte.Replace("×", "*").Replace(" ", "").ToLower();
+
+
+                    // Essayer une conversion directe (par ex. "4.5")
+                    if (double.TryParse(texte, NumberStyles.Float, CultureInfo.InvariantCulture, out double directResult))
+                    {
+                        Console.WriteLine($"{texte}===>{directResult}");
+                    }
+
+                    // Expression régulière pour extraire les parties significatives
+                    var regex = new Regex(@"([+-]?\d*\.?\d+)\*10\^([+-]?\d+)");
+                    var match = regex.Match(texte);
+
+                    if (!match.Success)
+                        throw new FormatException("format invalide.");
+
+                    double baseNumber = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
+                    int exponent = int.Parse(match.Groups[2].Value, CultureInfo.InvariantCulture);
+                    double resultat = baseNumber * Math.Pow(10, exponent);
+
+                    string texte1 = valeurs[6];
+                    texte1 = texte1.Replace("×", "*").Replace(" ", "").ToLower();
+
+
+                    // Essayer une conversion directe (par ex. "4.5")
+                    if (double.TryParse(texte1, NumberStyles.Float, CultureInfo.InvariantCulture, out double directResult1))
+                    {
+                        Console.WriteLine($"{texte1}===>{directResult1}");
+                    }
+
+                    // Expression régulière pour extraire les parties significatives
+                    var regex1 = new Regex(@"([+-]?\d*\.?\d+)\*10\^([+-]?\d+)");
+                    var match1 = regex.Match(texte);
+
+                    if (!match.Success)
+                        throw new FormatException("format invalide.");
+
+                    double baseNumber1 = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
+                    int exponent1 = int.Parse(match.Groups[2].Value, CultureInfo.InvariantCulture);
+                    double resultat1 = baseNumber1 * Math.Pow(10, exponent1);
+                    ObjetCeleste etoile = new Etoile(valeurs[0], valeurs[1], valeurs[2], valeurs[3], double.Parse(texte), double.Parse((valeurs[5])), double.Parse(texte1));
                     objet = etoile;
                 }
                 else
