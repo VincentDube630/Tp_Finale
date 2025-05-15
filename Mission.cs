@@ -18,7 +18,8 @@ namespace Tp_Finale
         public List<Instrument> Instruments { get; set; }
         public ObjetCeleste Destination { get; set; }
         public Systeme systeme {  get; set; }
-        public Mission(string referenceMission,string nomMission,DateTime dateLancement,int dureeEstimee,string vaisseauSpatial,string categorie)
+        public string Matricule { get; set; }
+        public Mission(string referenceMission,string nomMission,DateTime dateLancement,int dureeEstimee,string vaisseauSpatial,string categorie,string matricule)
         {
             this.referenceMission = referenceMission;
             this.NomMission = nomMission;
@@ -26,6 +27,7 @@ namespace Tp_Finale
             this.DureeEstimee = dureeEstimee;
             this.VaisseauSpatial = vaisseauSpatial;
             this.Categorie = categorie;
+            this.Matricule = matricule;
         }
         public void AfficherInfo()
         {
