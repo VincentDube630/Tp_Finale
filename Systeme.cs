@@ -164,13 +164,83 @@ namespace Tp_Finale
                 }
                 else if (valeurs.Count > 2 && !string.IsNullOrWhiteSpace(valeurs[2]) && observateur1 == "")
                 {
-                    Scientifique scientifique = new Scientifique(id, nom, prenom, DateTime.Parse(valeurs[1]), "sijdsji");
+                    Scientifique scientifique = new Scientifique(id, nom, prenom, DateTime.Parse(valeurs[1]));
                     scientifique.AfficherInfo();
+                    Console.WriteLine();
+                    Console.WriteLine("Gestion des profils (GP)");
+                    Console.WriteLine("Gestion des objets (GO)");
+                    Console.WriteLine("Gestion des missions (GM)");
+                    Console.WriteLine("Gestion des instruments de mesures (GI)");
+                    Console.WriteLine("Simulation des mesures (SI)");
+                    Console.Write("Choix : ");
+                    string mo = "";
+                    bool recommencer = true;
+                    do
+                    {
+                        try
+                        {
+                            mo = Console.ReadLine();
+                            recommencer = true;
+                        }
+                        catch (FormatException)
+                        {
+                            recommencer = false;
+                            Console.WriteLine("Erreur, ce n'est pas une chaine de caractère");
+                        }
+                    } while (!recommencer);
+                    switch (mo)
+                    {
+                        case "GP":
+                            Console.WriteLine("Ajout d'un observateur (O)");
+                            Console.WriteLine("Ajouit d'un scientifique (S)");
+                            string choix = "";
+                            try
+                            {
+                               choix = Console.ReadLine();
+                            }
+                            catch(FormatException)
+                            {
+                                Console.WriteLine("Erreur, ce n'est pas une chaine de caractère");
+                            }
+                            if(choix == "O")
+                            {
+                                Console.Write("Numéro de matricule : ");
+                                string matricule = Console.ReadLine();
+                                Console.Write("Nom : ");
+                                string noom = Console.ReadLine();
+                                Console.Write("Prenom : ");
+                                string prenoom = Console.ReadLine();
+                                Console.Write("Date naissance : ");
+                                string dateNaissance = Console.ReadLine();
+                                Console.Write("Fonction : ");
+                                string fonction = Console.ReadLine();
+
+                                scientifique.AjouterObservateur(new Scientifique(matricule,noom,prenoom,DateTime.Parse(dateNaissance));
+                            }
+                            else if (choix == "S")
+                            {
+                                scientifique.AjouterScientifique();
+                            }
+
+                            break;
+                        case "GO":
+                            break;
+                        case "GM":
+                            break;
+                        case "GI":
+                            break;
+                        case "SI":
+                            break;
+                        default:
+                            break;
+                    }
+
                 }
                 else
                 {
-                    Observateur observateur = new Observateur(id,nom, prenom, DateTime.Parse(valeurs[1]), "233 rue djdd");
+                    Observateur observateur = new Observateur(id,nom, prenom, DateTime.Parse(valeurs[1]));
                     observateur.AfficherInfo();
+                    Console.WriteLine();
                     Console.WriteLine("Recherche d'une mission (RM) : ");
                     Console.WriteLine("Liste des missions (LM) : ");
                     Console.WriteLine("Recherche un scientifique (RS) : ");

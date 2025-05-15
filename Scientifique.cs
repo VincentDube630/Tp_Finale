@@ -12,7 +12,7 @@ namespace Tp_Finale
         public string Matricule { get; set; }
         public List<Mission> Missions { get; set; }
 
-        public Scientifique(string matricule, string nom, string prenom, DateTime dateNaissance, string adresse) : base(nom, prenom, dateNaissance, adresse)
+        public Scientifique(string matricule, string nom, string prenom, DateTime dateNaissance) : base(nom, prenom, dateNaissance)
         {
             Matricule = matricule;
         }
@@ -36,8 +36,9 @@ namespace Tp_Finale
 
         }
         public void AjouterObservateur(Observateur observateur)
-        {
-             
+        {w
+             Systeme systeme = new Systeme();
+             systeme.SauvegarderDonnees();
         }
         public void AjouterScientifique(Scientifique scientifique )
         {
