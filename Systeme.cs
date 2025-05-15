@@ -56,7 +56,7 @@ namespace Tp_Finale
                             listMission.Add(valeurs[4]);// le vaisseau devient le 3
                             listMission.Add(valeurs[5]);// la duree devient le 4
                             listMission.Add(valeurs[6]);// La date de lancement devient le 5
-                            if (!Systeme.dictionnaire.ContainsKey(cleValeur))
+                            if (!Systeme.dictionnaireMission.ContainsKey(cleValeur))
                             {
                                 Systeme.dictionnaireMission.Add(cleValeur, listMission);
 
@@ -87,9 +87,9 @@ namespace Tp_Finale
             }
             string cheminFichier1="InstrumentMesures";
 
-            if (File.Exists(cheminFichier))
+            if (File.Exists(cheminFichier1))
             {
-                foreach (var ligne in File.ReadLines(cheminFichier))
+                foreach (var ligne in File.ReadLines(cheminFichier1))
                 {
                     string[] donnees = ligne.Split(';');
 
@@ -111,14 +111,73 @@ namespace Tp_Finale
                             listeInstrumentsObservation.Add(valeurs[1]);
                             listeInstrumentsObservation.Add(valeurs[2]);
                             listeInstrumentsObservation.Add(valeurs[3]);
-                            Systeme.dictionnaireInstruments.Add(cleValeur, listeInstrumentsObservation);
+                            if (!Systeme.dictionnaireInstruments.ContainsKey(cleValeur))
+                            {
+                                Systeme.dictionnaireInstruments.Add(cleValeur, listeInstrumentsObservation);
+
+                            }
                         }
                         else
                         {
                             cleValeur=valeurs[0];
                             listeInstrumentsAnalyse.Add(valeurs[1]);
                             listeInstrumentsAnalyse.Add(valeurs[2]);
-                            Systeme.dictionnaireInstruments.Add(cleValeur,listeInstrumentsAnalyse);
+                            if (!Systeme.dictionnaireInstruments.ContainsKey(cleValeur))
+                            {
+                                Systeme.dictionnaireInstruments.Add(cleValeur, listeInstrumentsAnalyse);
+
+                            }
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Fichier introuvable");
+            }
+            string cheminFichier2 = "ObjetMission";
+            if (File.Exists(cheminFichier2))
+            {
+                foreach (var ligne in File.ReadLines(cheminFichier2))
+                {
+                    string[] donnees = ligne.Split(';');
+
+                    if (donnees.Length >= 1)
+                    {
+                        var valeurs = new List<string>();
+                        var listePlante = new List<string>(); // Liste qui va avec la clée du dictionnaire pour tous les objets planete
+                        var listeSatelitte = new List<string>(); // Liste qui va avec la clée du dictionnaire pour tous les objets satelitte
+                        var listeEtoile = new List<string>(); // Liste qui va avec la clée du dictionnaire pour tous les objets etoile
+                        string cleValeur;
+
+                        // Ajout des valeurs dans une liste générale
+                        for (int i = 0; i < donnees.Length; i++)
+                        {
+                            valeurs.Add(donnees[i]);
+                        }
+                        if (valeurs[6] != "")
+                        {
+                            cleValeur = valeurs[1];
+                            listePlante.Add(valeurs[1]);
+                            listeInstrumentsObservation.Add(valeurs[2]);
+                            listeInstrumentsObservation.Add(valeurs[3]);
+                            if (!Systeme.dictionnaireInstruments.ContainsKey(cleValeur))
+                            {
+                                Systeme.dictionnaireInstruments.Add(cleValeur, listeInstrumentsObservation);
+
+                            }
+                        }
+                        else
+                        {
+                            cleValeur = valeurs[0];
+                            listeInstrumentsAnalyse.Add(valeurs[1]);
+                            listeInstrumentsAnalyse.Add(valeurs[2]);
+                            if (!Systeme.dictionnaireInstruments.ContainsKey(cleValeur))
+                            {
+                                Systeme.dictionnaireInstruments.Add(cleValeur, listeInstrumentsAnalyse);
+
+                            }
                         }
 
                     }
@@ -289,7 +348,7 @@ namespace Tp_Finale
                             {
                                 Console.WriteLine("Ce n'est pas le bon format!");
                             }
-                            if (dictionnaire.ContainsKey(numeroReference) == false)
+                            if (dictionnaireMission.ContainsKey(numeroReference) == false)
                             {
                                 Console.WriteLine("Il n'y a pas de numéro de mission correspodant");
                             }
@@ -307,18 +366,52 @@ namespace Tp_Finale
                             }
                             break;
                         case "LM":
-                            int i = 0;
-                            List<string> list = new List<string>();
-                            foreach (var cle in dictionnaire.Keys)
+                            List<int> list = new List<int>();
+                            foreach (var valeur in dictionnaireMission.Values)
                             {
-                                list.Add(cle);
-                                    i++;
+                                string dureeString = valeur[4];
+                                int duree = int.Parse(dureeString);
+                                list.Add(duree);
+
                             }
+                            list.Sort();
+                            List<List<string>> missionsTri = new List<List<string>>();
+                            for (int i = 0; i < dictionnaireMission.Count; i++)
+                            {
+                                foreach (var item in dictionnaireMission.Keys)
+                                {
+                                    List<string> a = new List<string>();
+                                    a = dictionnaireMission[item];
+                                    int duree = int.Parse(a[4]);
+                                    if (list[i] == duree)
+                                    {
+                                        missionsTri.Add(a);
+                                        Mission mission = new Mission(item, a[0], DateTime.Parse(a[5]), duree, a[3], a[2]);
+                                        mission.AfficherInfo();
+                                    }
+                                }
+                            }
+
                             break;
                         case "RS":
                             break;
                         case "LS":
-                            break;
+                            List<string> utilisateur;
+                            foreach (var item in dictionnaire.Keys)
+                            {
+                                utilisateur = dictionnaire[item];
+                                utilisateur.Add("");
+                                if (utilisateur[2] != "")
+                                {
+                                    Console.WriteLine($"Nom : {dictionnaire[item][0]}");
+                                    Console.WriteLine($"Matricule : {item}");
+                                    Console.WriteLine($"Nom : {dictionnaire[item][1]}");
+                                    Console.WriteLine($"Fonction : {dictionnaire[item][2]}");
+                                    Console.WriteLine();
+                                }
+                            }
+
+                                break;
                         case "LI":
                             Console.WriteLine("Numéro de référence : ");
                             numeroReference = "";
@@ -330,13 +423,13 @@ namespace Tp_Finale
                             {
                                 Console.WriteLine("Ce n'est pas le bon format!");
                             }
-                            if (dictionnaire.ContainsKey(numeroReference) == false)
+                            if (dictionnaireInstruments.ContainsKey(numeroReference) == false)
                             {
                                 Console.WriteLine("Il n'y a pas de numéro de mission correspodant");
                             }
                             else
                             {
-                                List<string> valeurs1 = dictionnaire[numeroReference];
+                                List<string> valeurs1 = dictionnaireInstruments[numeroReference];
                                 if (valeurs1[3] != "")
                                 {
                                     InstrumentObservation instrumentObservation2 = new InstrumentObservation(numeroReference, valeurs1[1], valeurs1[2], int.Parse(valeurs1[3]));
