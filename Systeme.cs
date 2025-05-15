@@ -198,24 +198,29 @@ namespace Tp_Finale
 
                 if (valeurs[6] == "" && valeurs[7] == "")
                 {
-                    ObjetCeleste planete = new Planete(valeurs[0], valeurs[1], valeurs[2], valeurs[3], double.Parse(valeurs[4]), double.Parse(valeurs[5]));
+                    double resultat1 = ConvertirNotationScientifiqueDouble(valeurs[4]);
+                    ObjetCeleste planete = new Planete(valeurs[0], valeurs[1], valeurs[2], valeurs[3],resultat1, double.Parse(valeurs[5]));
                     objet = planete;
                 }
                 else if (valeurs[7] == "")
                 {
                     double resultat1 = ConvertirNotationScientifiqueDouble(valeurs[4]);
                     double resultat2 = ConvertirNotationScientifiqueDouble(valeurs[6]);
-                    ObjetCeleste etoile = new Etoile(valeurs[0], valeurs[1], valeurs[2], valeurs[3], resultat1, double.Parse((valeurs[5])),resultat2);
+                    ObjetCeleste etoile = new Etoile(valeurs[0], valeurs[1], valeurs[2], valeurs[3], resultat1, double.Parse(valeurs[5], CultureInfo.InvariantCulture),resultat2);
                     objet = etoile;
                 }
                 else
                 {
-                    ObjetCeleste satellite = new Satellite(valeurs[0], valeurs[1], valeurs[2], valeurs[3], double.Parse(valeurs[4]), double.Parse(valeurs[5]), double.Parse(valeurs[6]), double.Parse(valeurs[7]));
+                    double resultat1 = ConvertirNotationScientifiqueDouble(valeurs[4]);
+                    ObjetCeleste satellite = new Satellite(valeurs[0], valeurs[1], valeurs[2], valeurs[3],resultat1, double.Parse(valeurs[5], CultureInfo.InvariantCulture), double.Parse(valeurs[6], CultureInfo.InvariantCulture), double.Parse(valeurs[7]));
                     objet = satellite;
                 }
 
                 // Missions
-                dictionnaireMission[objet.Scientifique].Destination = objet;
+                if (dictionnaireMission.ContainsKey(objet.Scientifique))
+                {
+                    dictionnaireMission[objet.Scientifique].Destination = objet;
+                }
             }
         }
         static double ConvertirNotationScientifiqueDouble(string input)
