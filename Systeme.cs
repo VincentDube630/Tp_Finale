@@ -10,7 +10,8 @@ namespace Tp_Finale
     internal class Systeme
     {
         public static Dictionary<string, List<string>> dictionnaire { get; set; } = new Dictionary<string, List<string>>();
-        public static Dictionary<string, List<string>> dictionnaireInstruments { get; set; }
+        public static Dictionary<string, List<string>> dictionnaireInstruments { get; set; } = new Dictionary<string, List<string>>();
+        public static Dictionary<string, List<string>> dictionnaireMission { get; set; } = new Dictionary<string, List<string>>();
 
         public static void ChargerDonnees()
         {
@@ -57,7 +58,7 @@ namespace Tp_Finale
                             listMission.Add(valeurs[6]);// La date de lancement devient le 5
                             if (!Systeme.dictionnaire.ContainsKey(cleValeur))
                             {
-                                Systeme.dictionnaire.Add(cleValeur, listMission);
+                                Systeme.dictionnaireMission.Add(cleValeur, listMission);
 
                             }
 
@@ -209,7 +210,7 @@ namespace Tp_Finale
                             }
                             else
                             {
-                                List<string> valeurs1 = dictionnaire[numeroReference];
+                                List<string> valeurs1 = dictionnaireMission[numeroReference];
                                 Mission mission = new Mission(numeroReference, valeurs1[0], DateTime.Parse(valeurs1[5]), int.Parse(valeurs1[4]), valeurs1[3], valeurs1[2]);
                                 mission.AfficherInfo();
                                 Console.WriteLine();
@@ -221,6 +222,13 @@ namespace Tp_Finale
                             }
                             break;
                         case "LM":
+                            int i = 0;
+                            List<string> list = new List<string>();
+                            foreach (var cle in dictionnaire.Keys)
+                            {
+                                list.Add(cle);
+                                    i++;
+                            }
                             break;
                         case "RS":
                             break;
@@ -246,11 +254,11 @@ namespace Tp_Finale
                                 List<string> valeurs1 = dictionnaire[numeroReference];
                                 if (valeurs1[3] != "")
                                 {
-                                    
+                                    InstrumentObservation instrumentObservation2 = new InstrumentObservation(numeroReference, valeurs1[1], valeurs1[2], int.Parse(valeurs1[3]));
                                 }
                                 else
                                 {
-                                    
+                                    InstrumentAnalyse instrumentAnalyse2 = new InstrumentAnalyse(numeroReference, valeurs1[1], valeurs1[2]);
                                 }
                                 Console.WriteLine();
                                 Console.WriteLine();
