@@ -17,8 +17,8 @@ namespace Tp_Finale
         public Systeme systeme { get; set; }
         public string Scientifique {  get; set; }
         public string Mission {  get; set; }
-
-        public ObjetCeleste(string scientifique,string mission,string nomObjet,string dateDebut,double masse, string categorie, double rayon)
+        public ObjetCeleste Destination { get; set; }
+        public ObjetCeleste(string scientifique,string mission,string nomObjet,string dateDebut,double masse, string categorie, double rayon,ObjetCeleste destination)
         {
             Scientifique = scientifique;
             Mission = mission;
@@ -27,6 +27,7 @@ namespace Tp_Finale
             Categorie = categorie;
             DateDebut = dateDebut;
             Rayon = rayon;
+            Destination = destination;
         }
         public abstract void CalculerVitesseGravitationelle();
         public abstract void CalculerVitesseOrbitale();
