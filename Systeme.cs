@@ -204,6 +204,23 @@ namespace Tp_Finale
                             }
                             if(choix == "O")
                             {
+                                Console.Write("Numéro de l'identification : ");
+                                string matricule = Console.ReadLine();
+                                Console.Write("Nom : ");
+                                string noom = Console.ReadLine();
+                                Console.Write("Prenom : ");
+                                string prenoom = Console.ReadLine();
+                                Console.Write("Date naissance : ");
+                                string dateNaissance = Console.ReadLine();
+                                scientifique.AjouterObservateur(new Observateur(matricule, noom, prenoom, DateTime.Parse(dateNaissance)));
+                                List<string> liste = new List<string>();
+                                liste.Add(noom);
+                                liste.Add(prenom);
+                                liste.Add(dateNaissance);
+                                Systeme.dictionnaire.Add(matricule, liste);
+                            }
+                            else if (choix == "S")
+                            {
                                 Console.Write("Numéro de matricule : ");
                                 string matricule = Console.ReadLine();
                                 Console.Write("Nom : ");
@@ -212,14 +229,12 @@ namespace Tp_Finale
                                 string prenoom = Console.ReadLine();
                                 Console.Write("Date naissance : ");
                                 string dateNaissance = Console.ReadLine();
-                                Console.Write("Fonction : ");
-                                string fonction = Console.ReadLine();
-
-                                scientifique.AjouterObservateur(new Scientifique(matricule,noom,prenoom,DateTime.Parse(dateNaissance));
-                            }
-                            else if (choix == "S")
-                            {
-                                scientifique.AjouterScientifique();
+                                scientifique.AjouterScientifique(new Scientifique(matricule,noom,prenoom,DateTime.Parse(dateNaissance)));
+                                List<string>liste=new List<string>();
+                                liste.Add(noom);
+                                liste.Add(prenom);
+                                liste.Add(dateNaissance);
+                                Systeme.dictionnaire.Add(matricule, liste);
                             }
 
                             break;

@@ -36,13 +36,16 @@ namespace Tp_Finale
 
         }
         public void AjouterObservateur(Observateur observateur)
-        {w
+        {
+            Console.WriteLine("Ajout réussi de l'observateur!");
              Systeme systeme = new Systeme();
              systeme.SauvegarderDonnees();
         }
         public void AjouterScientifique(Scientifique scientifique )
         {
-            
+            Console.WriteLine("Ajout réussi du scientifique");
+            Systeme systeme = new Systeme();
+            systeme.SauvegarderDonnees();
         }
         public override void AfficherInfo()
         {
