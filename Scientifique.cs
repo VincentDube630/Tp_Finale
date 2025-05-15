@@ -51,7 +51,7 @@ namespace Tp_Finale
             base.AfficherInfo();
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
             Console.WriteLine("Résumé profil ");
-            Console.WriteLine($"Total des missions affectées : {Missions.Count}");
+            Console.WriteLine($"Total des missions affectées : ");
             Console.WriteLine($"Catégorie planète :  ");
             Console.WriteLine($"Catégorie Etoile : ");
             Console.WriteLine($"Catégorie Satelitte : ");

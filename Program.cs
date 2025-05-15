@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             Systeme systeme = new Systeme();
-            systeme.ChargerDonnees();
+            Systeme.ChargerDonnees();
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
             Console.WriteLine("                         Simulation des \n                         missions spatiales");
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
@@ -23,12 +23,20 @@
                     Console.WriteLine("                         Simulation des \n                         missions spatiales");
                     Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
                     Console.WriteLine();
-                    Console.WriteLine("Option Observateur : ");
+                    Console.WriteLine("Option observateur : ");
                     Console.Write("Veuillez fournir le numéro d'identification ----> ");
                     string id1 = Console.ReadLine();
                     systeme.ConnexionUtilisateur(id1);
                     break;
                 case "S":
+                    Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                    Console.WriteLine("                         Simulation des \n                         missions spatiales");
+                    Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                    Console.WriteLine();
+                    Console.WriteLine("Option scientifique : ");
+                    Console.Write("Veuillez fournir le numéro matricule ----> ");
+                    string id2 = Console.ReadLine();
+                    systeme.ConnexionUtilisateur(id2);
                     break;
                 case "Q":
                     Environment.ExitCode = 0;

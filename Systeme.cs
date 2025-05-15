@@ -8,49 +8,66 @@ namespace Tp_Finale
 {
     internal class Systeme
     {
-        public Dictionary<string, List<string>> dictionnaire {  get; set; }
+        public static Dictionary<string, List<string>> dictionnaire { get; set; } = new Dictionary<string, List<string>>();
         public Dictionary<string, List<string>> dictionnaire2 { get; set; }
 
-        public Dictionary<string,List<string>> ChargerDonnees()
+        public static void ChargerDonnees()
         {
-            dictionnaire = new Dictionary<string, List<string>>();
             string cheminFichier = "Donnees.csv";
-            
 
             if (File.Exists(cheminFichier))
             {
-                string[] lignes = File.ReadAllLines(cheminFichier);
-
-                foreach (string ligne in lignes)
+                foreach (var ligne in File.ReadLines(cheminFichier).Take(35))
                 {
-                    if (string.IsNullOrWhiteSpace(ligne))
-                    {
-                        continue;
-                    }
-                        
+                    string[] donnees = ligne.Split(';');
 
-                    string[] ligness = ligne.Split(';');
-
-                    if (ligness.Length >= 1)
+                    if (donnees.Length >= 1)
                     {
-                        string cleValeur = ligness[0].Trim();
                         var valeurs = new List<string>();
+                        var listeObservateur = new List<string>(); // Liste qui va avec la clée du dictionnaire pour les observateurs
+                        var listeScientifique = new List<string>(); // Liste pour les scientifiques
+                        string cleValeur;
 
-                        for (int i = 1; i < ligness.Length; i++)
+                        // Ajout des valeurs dans une liste générale
+                        for (int i = 0; i < donnees.Length; i++)
                         {
-                            valeurs.Add(ligness[i].Trim());
+                            valeurs.Add(donnees[i]);
                         }
-                        dictionnaire[cleValeur] = valeurs;
+                        // Si observateur
+                        if (valeurs[3] == "")
+                        {
+                            cleValeur = donnees[0];
+                            listeObservateur.Add(valeurs[1]); // Deviens le nom en 0
+                            listeObservateur.Add(valeurs[2]); // Deviens date naissance en 1
+
+                            // Ajouter au dictionnaire
+                            Systeme.dictionnaire.Add(cleValeur, listeObservateur);
+
+                        }
+                        // Si scientifique
+                        else
+                        {
+                            cleValeur = valeurs[3];
+                            listeScientifique.Add(valeurs[1]); // Deviens le nom en 0
+                            listeScientifique.Add(valeurs[2]); // Deviens date naissance en 1
+                            listeScientifique.Add(valeurs[4]); // Deviens la fonction (ingénieur...) en 2
+
+                            // Ajouter au dictionnaire
+
+                            if (!Systeme.dictionnaire.ContainsKey(cleValeur))
+                            {
+                                Systeme.dictionnaire.Add(cleValeur, listeScientifique);
+                            }
+                        }
                     }
                 }
-
             }
             else
             {
                 Console.WriteLine("Fichier introuvable");
             }
-            return dictionnaire;
         }
+        
         public void SauvegarderDonnees()
         {
 
@@ -60,23 +77,33 @@ namespace Tp_Finale
         {
             if (dictionnaire.ContainsKey(id) == false)
             {
-                Console.WriteLine("Il n'y a pas d'observateur qui possèdent ce numéro d'indentification.");
+                Console.WriteLine("Aucune correspondance trouvé");
             }
             else
             {
+                string observateur1 = "";
                 List<string> valeurs = dictionnaire[id];
                 string nomComplet = valeurs[0];
                 string[] nomGauche = nomComplet.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 string prenom = "";
                 string nom = "";
+                if (valeurs.Count < 2 && !string.IsNullOrWhiteSpace(valeurs[ 2]))
+                {
+                    observateur1 = "A";
+                }
                 if (nomGauche.Length >= 2)
                 {
                     prenom = nomGauche[0];
                     nom = string.Join(" ", nomGauche.Skip(1)); // Si Nom de famille avec espace
-                }    
-                if (!string.IsNullOrWhiteSpace(valeurs[2])) // Si il y a des données a la valeur 3 du la liste a l'id donnée alors ce n'est pas un observateur mais un scientifique
+                }
+                if (valeurs.Count > 2 && !string.IsNullOrWhiteSpace(valeurs[2])&& observateur1=="A") // Si il y a des données a la valeur 3 du la liste a l'id donnée alors ce n'est pas un observateur mais un scientifique
                 {
                     Console.WriteLine("Ce numéro n'est pas un observateur");
+                }
+                else if (valeurs.Count > 2 && !string.IsNullOrWhiteSpace(valeurs[2]) && observateur1 == "")
+                {
+                    Scientifique scientifique = new Scientifique(id, nom, prenom, DateTime.Parse(valeurs[1]), "sijdsji");
+                    scientifique.AfficherInfo();
                 }
                 else
                 {
@@ -96,7 +123,8 @@ namespace Tp_Finale
                             {
                                 Console.WriteLine("Ce n'est pas le bon format!");
                             }
-                            List<string> list = dictionnaire[id];
+                            List<string> list = dictionnaire2[numeroReference];
+                            Console.WriteLine(dictionnaire2[numeroReference]); 
                             break;
                         default:
                             break;
