@@ -43,9 +43,9 @@ namespace Tp_Finale
                             // Ajouter au dictionnaire
                             Systeme.dictionnaire.Add(cleValeur, listeObservateur);
 
-                        }
+                        }else if =awadwdzx<<000....w
                         // Si scientifique
-                        else
+                        else 
                         {
                             cleValeur = valeurs[3];
                             listeScientifique.Add(valeurs[1]); // Deviens le nom en 0
