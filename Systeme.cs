@@ -84,6 +84,76 @@ namespace Tp_Finale
             {
                 Console.WriteLine("Fichier introuvable");
             }
+            string cheminFichier1=;
+
+            if (File.Exists(cheminFichier))
+            {
+                foreach (var ligne in File.ReadLines(cheminFichier))
+                {
+                    string[] donnees = ligne.Split(';');
+
+                    if (donnees.Length >= 1)
+                    {
+                        var valeurs = new List<string>();
+                        var listeObservateur = new List<string>(); // Liste qui va avec la clée du dictionnaire pour les observateurs
+                        var listeScientifique = new List<string>(); // Liste pour les scientifiques
+                        var listMission = new List<string>();
+                        string cleValeur;
+
+                        // Ajout des valeurs dans une liste générale
+                        for (int i = 0; i < donnees.Length; i++)
+                        {
+                            valeurs.Add(donnees[i]);
+                        }
+                        // Si observateur
+                        if (valeurs[3] == "")
+                        {
+                            cleValeur = donnees[0];
+                            listeObservateur.Add(valeurs[1]); // Deviens le nom en 0
+                            listeObservateur.Add(valeurs[2]); // Deviens date naissance en 1
+
+                            // Ajouter au dictionnaire
+                            Systeme.dictionnaire.Add(cleValeur, listeObservateur);
+
+                        }
+                        if (valeurs[5] != "")
+                        {
+                            cleValeur = valeurs[1];
+                            listMission.Add(valeurs[0]); // Le nom de la mission devient 0
+                            listMission.Add(valeurs[2]);//Le matricule du scientifique devient le numero 1
+                            listMission.Add(valeurs[3]);//la catégorie devient le numero 2
+                            listMission.Add(valeurs[4]);// le vaisseau devient le 3
+                            listMission.Add(valeurs[5]);// la duree devient le 4
+                            listMission.Add(valeurs[6]);// La date de lancement devient le 5
+                            if (!Systeme.dictionnaire.ContainsKey(cleValeur))
+                            {
+                                Systeme.dictionnaire.Add(cleValeur, listMission);
+
+                            }
+
+                        }
+                        // Si scientifique
+                        if (valeurs[5] == "" && valeurs[3] != "")
+                        {
+                            cleValeur = valeurs[3];
+                            listeScientifique.Add(valeurs[1]); // Deviens le nom en 0
+                            listeScientifique.Add(valeurs[2]); // Deviens date naissance en 1
+                            listeScientifique.Add(valeurs[4]); // Deviens la fonction (ingénieur...) en 2
+
+                            // Ajouter au dictionnaire
+
+                            if (!Systeme.dictionnaire.ContainsKey(cleValeur))
+                            {
+                                Systeme.dictionnaire.Add(cleValeur, listeScientifique);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Fichier introuvable");
+            }
         }
         
         public void SauvegarderDonnees()
@@ -178,9 +248,15 @@ namespace Tp_Finale
                             }
                             break;
                         case "LM":
-                            if(dictionnaire.ContainsKey(*))
+                            break;
+                        case "RS":
+                            break;
+                        case "LS":
+                            break;
+                        case "LI":
                             break;
                         default:
+
                             break;
                     }
                 }
