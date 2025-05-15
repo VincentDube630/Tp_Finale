@@ -9,7 +9,7 @@ namespace Tp_Finale
 {
     internal class Planete:ObjetCeleste
     {
-        public Planete(string scientifique,string mission,string nomObjet, int masse,string dateDebut,double rayon, ObjetCeleste destination) : base(scientifique, mission,nomObjet, dateDebut, masse, "Planete",rayon,destination) { }
+        public Planete(string scientifique,string mission,string nomObjet, string dateDebut,double masse,double rayon) : base(scientifique, mission,nomObjet, dateDebut, masse,rayon) { }
         public override void CalculerVitesseGravitationelle()
         {
             

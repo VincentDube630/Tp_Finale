@@ -11,7 +11,7 @@ namespace Tp_Finale
     {
         public static Dictionary<string, List<string>> dictionnaire { get; set; } = new Dictionary<string, List<string>>();
         public static Dictionary<string, List<string>> dictionnaireInstruments { get; set; } = new Dictionary<string, List<string>>();
-        public static Dictionary<string, List<string>> dictionnaireMission { get; set; } = new Dictionary<string, List<string>>();
+        public static Dictionary<string, Mission> dictionnaireMission { get; set; } = new Dictionary<string, Mission>();
 
         public static void ChargerDonnees()
         {
@@ -50,15 +50,16 @@ namespace Tp_Finale
                         if (valeurs[5]!="")
                         {
                             cleValeur=valeurs[1];
-                            listMission.Add(valeurs[0]); // Le nom de la mission devient 0
-                            listMission.Add(valeurs[2]);//Le matricule du scientifique devient le numero 1
-                            listMission.Add(valeurs[3]);//la catégorie devient le numero 2
-                            listMission.Add(valeurs[4]);// le vaisseau devient le 3
-                            listMission.Add(valeurs[5]);// la duree devient le 4
-                            listMission.Add(valeurs[6]);// La date de lancement devient le 5
+                            Mission mission = new Mission(valeurs[1], valeurs[0], DateTime.Parse(valeurs[6]), int.Parse(valeurs[5]), valeurs[4], valeurs[3]); 
+                            //valeurs[0]); // Le nom de la mission devient 0
+                            //listMission.Add(valeurs[2]);//Le matricule du scientifique devient le numero 1
+                            //listMission.Add(valeurs[3]);//la catégorie devient le numero 2
+                            //listMission.Add(valeurs[4]);// le vaisseau devient le 3
+                            //listMission.Add(valeurs[5]);// la duree devient le 4
+                            //listMission.Add(valeurs[6]);// La date de lancement devient le 5
                             if (!Systeme.dictionnaireMission.ContainsKey(cleValeur))
                             {
-                                Systeme.dictionnaireMission.Add(cleValeur, listMission);
+                                Systeme.dictionnaireMission.Add(cleValeur, mission);
 
                             }
 
@@ -187,8 +188,34 @@ namespace Tp_Finale
             {
                 Console.WriteLine("Fichier introuvable");
             }
+            // Objets célestes
+            foreach (var ligne in File.ReadLines("ObjetMission.csv"))
+            {
+                string[] valeurs = ligne.Split(';');
+                ObjetCeleste objet;
+
+                if (valeurs[6] == "" && valeurs[7] == "")
+                {
+                    ObjetCeleste planete = new Planete(valeurs[0], valeurs[1], valeurs[2], valeurs[3], double.Parse(valeurs[4]), double.Parse(valeurs[5]));
+                    objet = planete;
+                }
+                else if (valeurs[7] == "")
+                {
+                    ObjetCeleste etoile = new Etoile(valeurs[0], valeurs[1], valeurs[2], valeurs[3], double.Parse(valeurs[4]), double.Parse((valeurs[5])), double.Parse(valeurs[6]));
+                    objet = etoile;
+                }
+                else
+                {
+                    ObjetCeleste satellite = new Satellite(valeurs[0], valeurs[1], valeurs[2], valeurs[3], double.Parse(valeurs[4]), double.Parse(valeurs[5]), double.Parse(valeurs[6]), double.Parse(valeurs[7]));
+                    objet = satellite;
+                }
+
+                // Missions
+                dictionnaireMission[objet.Scientifique].Destination = objet;
+            }
+
         }
-        
+
         public void SauvegarderDonnees()
         {
 
@@ -354,9 +381,9 @@ namespace Tp_Finale
                             }
                             else
                             {
-                                List<string> valeurs1 = dictionnaireMission[numeroReference];
-                                Mission mission = new Mission(numeroReference, valeurs1[0], DateTime.Parse(valeurs1[5]), int.Parse(valeurs1[4]), valeurs1[3], valeurs1[2]);
-                                mission.AfficherInfo();
+                                Mission valeurs1 = dictionnaireMission[numeroReference];
+                                //Mission mission = new Mission(numeroReference, valeurs1[0], DateTime.Parse(valeurs1[5]), int.Parse(valeurs1[4]), valeurs1[3], valeurs1[2]);
+                                valeurs1.AfficherInfo();
                                 Console.WriteLine();
                                 Console.WriteLine();
                                 Console.Write("Revenir au menu princiaple : ");
@@ -369,8 +396,9 @@ namespace Tp_Finale
                             List<int> list = new List<int>();
                             foreach (var valeur in dictionnaireMission.Values)
                             {
-                                string dureeString = valeur[4];
-                                int duree = int.Parse(dureeString);
+                                //string dureeString = valeur[4];
+                                //int duree = int.Parse(dureeString);
+                                int duree = valeur.DureeEstimee;
                                 list.Add(duree);
 
                             }
@@ -380,13 +408,15 @@ namespace Tp_Finale
                             {
                                 foreach (var item in dictionnaireMission.Keys)
                                 {
-                                    List<string> a = new List<string>();
-                                    a = dictionnaireMission[item];
-                                    int duree = int.Parse(a[4]);
+                                    //List<string> a = new List<string>();
+                                    //a = dictionnaireMission[item];
+                                    Mission mission = dictionnaireMission[item];
+                                    int duree = mission.DureeEstimee;
                                     if (list[i] == duree)
                                     {
-                                        missionsTri.Add(a);
-                                        Mission mission = new Mission(item, a[0], DateTime.Parse(a[5]), duree, a[3], a[2]);
+                                        //missionsTri.Add(a);
+                                        //Mission mission = new Mission(item, a[0], DateTime.Parse(a[5]), duree, a[3], a[2]);
+                                        //mission.AfficherInfo();
                                         mission.AfficherInfo();
                                     }
                                 }

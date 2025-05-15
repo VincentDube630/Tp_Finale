@@ -10,7 +10,7 @@ namespace Tp_Finale
     {
         public double Altitude {  get; set; }
         public double VitesseOrbital {  get; set; }
-        public Satellite(string scientifique,string mission,string nomObjet, int masse, string type,string dateDebut,double rayon, double altitude,double vitesseOrbital,ObjetCeleste destination) : base(scientifique,mission,nomObjet, dateDebut, masse, "Satelitte",rayon,destination)
+        public Satellite(string scientifique,string mission,string nomObjet,  string dateDebut,double masse,double rayon, double altitude,double vitesseOrbital) : base(scientifique,mission,nomObjet, dateDebut, masse,rayon)
         {
             this.Altitude=altitude;
             this.VitesseOrbital=vitesseOrbital;
