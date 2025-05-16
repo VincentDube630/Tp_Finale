@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -477,8 +478,43 @@ namespace Tp_Finale
                             switch (choix)
                             {
                                 case "IO":
+                                    Console.Write("Numéro de référence de la mission : ");
+                                    string numeroReference = Console.ReadLine();
+                                    if (dictionnaireInstruments.ContainsKey(numeroReference)==true)
+                                    {
+                                        Console.Write("Id instrument : ");
+                                        string idInstrument = Console.ReadLine();
+                                        Console.Write("Nom instrument : ");
+                                        string nomInstrument = Console.ReadLine();
+                                        Console.Write("Champs de vision : ");
+                                        string champsVision = Console.ReadLine();
+                                        Console.Write("Longueur de l'onde : ");
+                                        string longueurOnde = Console.ReadLine();
+                                        List<string> list = new List<string>();
+                                        list.Add(nomInstrument);
+                                        list.Add(champsVision);
+                                        list.Add(longueurOnde);
+                                        dictionnaireInstruments.Add(numeroReference, list);
+                                    }
+                                    
                                     break;
                                 case "IA":
+                                    Console.Write("Numéro de référence de la mission : ");
+                                    numeroReference = Console.ReadLine();
+                                    if (dictionnaireInstruments.ContainsKey(numeroReference) == true)
+                                    {
+                                        Console.Write("Id instrument : ");
+                                        string idInstrument = Console.ReadLine();
+                                        Console.Write("Nom instrument : ");
+                                        string nomInstrument = Console.ReadLine();
+                                        Console.Write("Type de signale : ");
+                                        string typeSignal = Console.ReadLine();
+                                        
+                                        List<string> list = new List<string>();
+                                        list.Add(nomInstrument);
+                                        list.Add(typeSignal);
+                                        dictionnaireInstruments.Add(numeroReference, list);
+                                    }
                                     break;
                                 case "Q":
                                     ConnexionUtilisateur(id);
