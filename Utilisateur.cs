@@ -8,11 +8,13 @@ namespace Tp_Finale
 {
     internal class Utilisateur
     {
+        // Création des attributs 
         public string Nom {  get; set; }
         public string Prenom { get; set; }
         public DateTime DateNaissance { get; set; }
         public Systeme Systemes { get; set; }
         
+        // Constructeur pour les classes fille
         public Utilisateur(string nom,string prenom,DateTime dateNaissance)
         {
             Nom = nom;
@@ -20,6 +22,7 @@ namespace Tp_Finale
             DateNaissance = dateNaissance;
         }
         
+        // foncction virtual pour que les classes filles puissent changer la fonction
         public virtual void AfficherInfo()
         {
             Console.WriteLine($"Prenom : {Prenom}");
