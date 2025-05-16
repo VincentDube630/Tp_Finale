@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -427,7 +428,7 @@ namespace Tp_Finale
                                         Console.Write("Nom de la mission : ");
                                         nom = Console .ReadLine();
                                         Console.Write("Numéro de référence de la mission");
-                                        string numeroMission = Console .ReadLine();
+                                        string numeroMission1 = Console .ReadLine();
                                         Console.Write("Catégorie de la mission : ");
                                         string categorie = Console .ReadLine();
                                         Console.Write("Vaisseau spatial  : ");
@@ -436,7 +437,7 @@ namespace Tp_Finale
                                         string duree = Console .ReadLine();
                                         Console.Write("Date de lancement : ");
                                         string date = Console .ReadLine();
-                                        dictionnaireMission.Add(matricule, new Mission(numeroMission, nom, DateTime.Parse(date), int.Parse(duree), vaisseau, categorie, matricule));
+                                        dictionnaireMission.Add(matricule, new Mission(numeroMission1, nom, DateTime.Parse(date), int.Parse(duree), vaisseau, categorie, matricule));
                                         
                                     }
                                     else
@@ -451,7 +452,9 @@ namespace Tp_Finale
                                     {
                                         if (mission.NomMission== numeroMission)
                                         {
-                                            dictionnaireMission.Remove(mission);
+                                            string lalal = dictionnaireMission[mission.NomMission].Matricule;
+                                            dictionnaireMission.Remove(lalal);
+                                            Console.WriteLine("Mission suprimmé de la base de donnés");
                                         }
                                     }
                                     break;
