@@ -575,22 +575,31 @@ namespace Tp_Finale
                             {
                                 Console.WriteLine("Ce n'est pas le bon format!");
                             }
-                            if (dictionnaireMission.ContainsKey(numeroReference) == false)
+                            do
                             {
-                                Console.WriteLine("Il n'y a pas de numéro de mission correspodant");
-                            }
-                            else
-                            {
-                                Mission valeurs1 = dictionnaireMission[numeroReference];
-                                //Mission mission = new Mission(numeroReference, valeurs1[0], DateTime.Parse(valeurs1[5]), int.Parse(valeurs1[4]), valeurs1[3], valeurs1[2]);
-                                valeurs1.AfficherInfo();
-                                Console.WriteLine();
-                                Console.WriteLine();
-                                Console.Write("Revenir au menu princiaple : ");
-                                string revenir = Console.ReadLine();
-                                ConnexionUtilisateur(id);
-                                
-                            }
+                                if (dictionnaireMission.ContainsKey(numeroReference) == false)
+                                {
+                                    Console.WriteLine("Il n'y a pas de numéro de mission correspodant");
+                                    Console.Write("Rentrer à nouveau le numéro de référence ou (Q) pour quitter : ");
+                                    numeroReference = Console.ReadLine();
+                                    if (numeroReference == "Q")
+                                    {
+                                        ConnexionUtilisateur(id);
+                                    }
+                                }
+                                else
+                                {
+                                    Mission valeurs1 = dictionnaireMission[numeroReference];
+                                    //Mission mission = new Mission(numeroReference, valeurs1[0], DateTime.Parse(valeurs1[5]), int.Parse(valeurs1[4]), valeurs1[3], valeurs1[2]);
+                                    valeurs1.AfficherInfo();
+                                    Console.WriteLine();
+                                    Console.WriteLine();
+                                    Console.Write("Revenir au menu princiaple : ");
+                                    string revenir = Console.ReadLine();
+                                    ConnexionUtilisateur(id);
+
+                                }
+                            }while(true);
                             break;
                         case "LM":
                             List<int> list = new List<int>();
@@ -645,13 +654,15 @@ namespace Tp_Finale
                                 }
                                 if (j == 0)
                                 {
-                                    Console.Write("Aucune mission affectée.");
+                                    Console.Write("Aucune mission affectée");
                                 }
 
                             }
                             else
                             {
-                                Console.WriteLine("Le scientifique n'existe pas.");
+                                Console.WriteLine("Le scientifique n'existe pas");
+                                Console.Write("Entrer n'importe quelle touche pour revenir au menu");
+                                ConnexionUtilisateur(id);
                             }
                             Console.WriteLine();
                             break;
@@ -673,6 +684,8 @@ namespace Tp_Finale
 
                                 break;
                         case "LI":
+                            recommencer = true;
+                            
                             Console.WriteLine("Numéro de référence : ");
                             numeroReference = "";
                             try
@@ -683,28 +696,38 @@ namespace Tp_Finale
                             {
                                 Console.WriteLine("Ce n'est pas le bon format!");
                             }
-                            if (dictionnaireInstruments.ContainsKey(numeroReference) == false)
+                            do
                             {
-                                Console.WriteLine("Il n'y a pas de numéro de mission correspodant");
-                            }
-                            else
-                            {
-                                List<string> valeurs1 = dictionnaireInstruments[numeroReference];
-                                if (valeurs1[3] != "")
+                                if (dictionnaireInstruments.ContainsKey(numeroReference) == false)
                                 {
-                                    InstrumentObservation instrumentObservation2 = new InstrumentObservation(numeroReference, valeurs1[1], valeurs1[2], int.Parse(valeurs1[3]));
+                                    Console.WriteLine("Il n'y a pas de numéro de mission correspodant");
+                                    Console.WriteLine();
+                                    Console.Write("Rentrer de nouveau le numéro de référence ou (Q) pour quitter: ");
+                                    numeroReference = Console.ReadLine();
+                                    if (numeroReference == "Q")
+                                    {
+                                        ConnexionUtilisateur(id);
+                                    }
+
                                 }
                                 else
                                 {
-                                    InstrumentAnalyse instrumentAnalyse2 = new InstrumentAnalyse(numeroReference, valeurs1[1], valeurs1[2]);
+                                    List<string> valeurs1 = dictionnaireInstruments[numeroReference];
+                                    if (valeurs1[3] != "")
+                                    {
+                                        InstrumentObservation instrumentObservation2 = new InstrumentObservation(numeroReference, valeurs1[1], valeurs1[2], int.Parse(valeurs1[3]));
+                                    }
+                                    else
+                                    {
+                                        InstrumentAnalyse instrumentAnalyse2 = new InstrumentAnalyse(numeroReference, valeurs1[1], valeurs1[2]);
+                                    }
+                                    Console.WriteLine();
+                                    Console.WriteLine();
+                                    Console.Write("Revenir au menu princiaple : ");
+                                    string revenir = Console.ReadLine();
+                                    ConnexionUtilisateur(id);
                                 }
-                                Console.WriteLine();
-                                Console.WriteLine();
-                                Console.Write("Revenir au menu princiaple : ");
-                                string revenir = Console.ReadLine();
-                                ConnexionUtilisateur(id);
-
-                            }
+                             }while (recommencer == true) ;
                             break;
                         default:
 
