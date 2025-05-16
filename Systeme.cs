@@ -265,6 +265,9 @@ namespace Tp_Finale
                 if (valeurs.Count > 2 && !string.IsNullOrWhiteSpace(valeurs[2])&& observateur1=="A") // Si il y a des données a la valeur 3 du la liste a l'id donnée alors ce n'est pas un observateur mais un scientifique
                 {
                     Console.WriteLine("Ce numéro n'est pas un observateur");
+                    Console.Write("Re rentrer votre numéro d'identification : ");
+                    id = Console.ReadLine();
+                    ConnexionUtilisateur(id);
                 }
                 else if (valeurs.Count > 2 && !string.IsNullOrWhiteSpace(valeurs[2]) && observateur1 == "")
                 {
@@ -343,10 +346,76 @@ namespace Tp_Finale
 
                             break;
                         case "GO":
+                            Console.WriteLine("Gestion des objets : ");
+                            Console.WriteLine();
+                            Console.WriteLine("Planètes (PL)");
+                            Console.WriteLine("Étoiles (ET)");
+                            Console.WriteLine("Satelittes (SA)");
+                            Console.WriteLine("Quitter (Q)");
+                            Console.WriteLine();
+                            Console.Write("Votre choix ----> ");
+                            choix = Console.ReadLine();
+                            switch (choix)
+                            {
+                                case "PL":
+
+                                    break;
+                                case "ET":
+
+                                    break;
+                                case "SA":
+
+                                    break;
+                                case "Q":
+                                    ConnexionUtilisateur(id);
+                                    break;
+                                default:
+                                    break;
+                            }
                             break;
                         case "GM":
+                            Console.WriteLine("Gestion des missions : ");
+                            Console.WriteLine();
+                            Console.WriteLine("Ajouter une mission (AM)");
+                            Console.WriteLine("Suprimmer une mission (SU)");
+                            Console.WriteLine("Quitter (Q)");
+                            Console.WriteLine();
+                            Console.Write("Votre choix ----> ");
+                            choix = Console.ReadLine();
+                            switch (choix)
+                            {
+                                case "AM":
+                                    break;
+                                case "SU":
+                                    break;
+                                case "Q":
+                                    ConnexionUtilisateur(id);
+                                    break;
+                                default:
+                                    break;
+                            }
                             break;
                         case "GI":
+                            Console.WriteLine("Gestion des instruments de mesures : ");
+                            Console.WriteLine();
+                            Console.WriteLine("Instrument d'observation (IO)");
+                            Console.WriteLine("Instrument d'analyse (IA)");
+                            Console.WriteLine("Quitter (Q)");
+                            Console.WriteLine();
+                            Console.Write("Votre choix ---> ");
+                            choix = Console.ReadLine();
+                            switch (choix)
+                            {
+                                case "IO":
+                                    break;
+                                case "IA":
+                                    break;
+                                case "Q":
+                                    ConnexionUtilisateur(id);
+                                    break;
+                                default:
+                                    break;
+                            }
                             break;
                         case "SI":
                             break;
