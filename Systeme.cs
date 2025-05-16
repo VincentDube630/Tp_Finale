@@ -18,6 +18,7 @@ namespace Tp_Finale
         public static Dictionary<string, List<string>> dictionnaire { get; set; } = new Dictionary<string, List<string>>();
         public static Dictionary<string, List<string>> dictionnaireInstruments { get; set; } = new Dictionary<string, List<string>>();
         public static Dictionary<string, Mission> dictionnaireMission { get; set; } = new Dictionary<string, Mission>();
+        public static Dictionary<string, List<string>> dictionnaireNouveauUtilisateur { get; set; } = new Dictionary<string, List<string>>();
 
         public static void ChargerDonnees()
         {
@@ -242,10 +243,36 @@ namespace Tp_Finale
         {
 
         }
-        public void SauvegarderDonneesScientifique(Utilisateur utilisateur )
+        public void SauvegarderDonneesScientifique()
         {
+            string cheminFichier = "Donnees.csv";
 
+            using (StreamWriter writer = new StreamWriter(cheminFichier, true))
+            {
+                foreach (var nouveau in Systeme.dictionnaireNouveauUtilisateur)
+                {
+                    string id = nouveau.Key;
+                    List<string> valeurs = nouveau.Value;
+                    string ligne = "";
+
+                    if (valeurs.Count == 2)
+                    {
+                        // Ajouter observateur
+                        ligne = $"{id};{valeurs[0]};{valeurs[1]};;;;";
+                    }
+                    else if (valeurs.Count == 3)
+                    {
+                        // Ajouter scientifique
+                        ligne = $";{valeurs[0]};{valeurs[1]};{id};{valeurs[2]};;;";
+                    }
+
+                    writer.WriteLine(ligne);
+                }
+            }
+
+            Console.WriteLine("Nouveaux utilisateurs sauvegardés dans Donnees.csv.");
         }
+    
         public void ConnexionUtilisateur(string id)
         {
             if (dictionnaire.ContainsKey(id) == false)
@@ -353,6 +380,8 @@ namespace Tp_Finale
                                     {
                                         Systeme.dictionnaire.Add(matricule, liste);
                                         Console.WriteLine("Observateur Créé");
+                                        dictionnaireNouveauUtilisateur.Add(matricule, liste);
+                                        SauvegarderDonneesScientifique();
                                     }
                                     else
                                     {
@@ -394,6 +423,8 @@ namespace Tp_Finale
                                     {
                                         Systeme.dictionnaire.Add(matricule, liste);
                                         Console.WriteLine("Scientifique créé avec succès !");
+                                        dictionnaireNouveauUtilisateur.Add(matricule, liste);
+                                        SauvegarderDonneesScientifique();
                                     }
                                     else
                                     {
@@ -517,7 +548,6 @@ namespace Tp_Finale
                                     case "SU":
                                         Console.WriteLine("Numero de la mission a suprimmer : ");
                                         string numeroMission = Console.ReadLine();
-                                        if ()
                                         foreach (var mission in dictionnaireMission.Values)
                                         {
                                             if (mission.NomMission == numeroMission)

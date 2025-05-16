@@ -12,7 +12,7 @@ namespace Tp_Finale
         public Planete(string scientifique,string mission,string nomObjet, string dateDebut,double masse,double rayon) : base(scientifique, mission,nomObjet, dateDebut, masse,rayon) { }
         public override void CalculerVitesseGravitationelle()
         {
-            
+
         }
         public override void CalculerVitesseOrbitale()
         {

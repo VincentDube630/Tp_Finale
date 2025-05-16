@@ -11,6 +11,7 @@ namespace Tp_Finale
     {
         public string Matricule { get; set; }
         public List<Mission> Missions { get; set; }
+        Systeme systeme;
 
         public Scientifique(string matricule, string nom, string prenom, DateTime dateNaissance) : base(nom, prenom, dateNaissance)
         {
@@ -29,6 +30,7 @@ namespace Tp_Finale
         }
         public void AjouterInstrument(Instrument instrument)
         {
+            Console.WriteLine("L'instrument a bien été enregistrer");
             
         }
         public void AjouterObjetCeleste()
@@ -56,7 +58,7 @@ namespace Tp_Finale
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
             Console.WriteLine("Résumé profil ");
             Console.WriteLine($"Total des missions affectées : ");
-            Console.WriteLine($"Catégorie planète :  ");
+            Console.WriteLine($"Catégorie planète :");
             Console.WriteLine($"Catégorie Etoile : ");
             Console.WriteLine($"Catégorie Satelitte : ");
         }
