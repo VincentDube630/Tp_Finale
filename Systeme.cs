@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -239,7 +240,10 @@ namespace Tp_Finale
         {
 
         }
+        public void SauvegarderDonneesScientifique(Utilisateur utilisateur )
+        {
 
+        }
         public void ConnexionUtilisateur(string id)
         {
             if (dictionnaire.ContainsKey(id) == false)
@@ -359,6 +363,10 @@ namespace Tp_Finale
                                 liste.Add(dateNaissance);
                                 Systeme.dictionnaire.Add(matricule, liste);
                             }
+                            else if(choix == "Q")
+                            {
+                                ConnexionUtilisateur(id);
+                            }
 
                             break;
                         case "GO":
@@ -374,7 +382,18 @@ namespace Tp_Finale
                             switch (choix)
                             {
                                 case "PL":
-
+                                    Console.WriteLine("Numéro de matricule du scientifique : ");
+                                    string matricule = Console.ReadLine();
+                                    if (dictionnaire.ContainsKey(matricule)==true)
+                                    {
+                                        Console.Write("Numéro d'identification de la mission : ");
+                                        string numero = Console .ReadLine();
+                                        
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Il n'y a pas de scientifique qui correspond à ce matricule ");
+                                    }
                                     break;
                                 case "ET":
 
@@ -401,8 +420,40 @@ namespace Tp_Finale
                             switch (choix)
                             {
                                 case "AM":
+                                    Console.Write("Numéro du scientifique pour l'ajout de la mission : ");
+                                    string matricule = Console.ReadLine();
+                                    if (dictionnaire.ContainsKey(matricule) == true)
+                                    {
+                                        Console.Write("Nom de la mission : ");
+                                        nom = Console .ReadLine();
+                                        Console.Write("Numéro de référence de la mission");
+                                        string numeroMission = Console .ReadLine();
+                                        Console.Write("Catégorie de la mission : ");
+                                        string categorie = Console .ReadLine();
+                                        Console.Write("Vaisseau spatial  : ");
+                                        string vaisseau = Console .ReadLine();
+                                        Console.Write("Durée estimée : ");
+                                        string duree = Console .ReadLine();
+                                        Console.Write("Date de lancement : ");
+                                        string date = Console .ReadLine();
+                                        dictionnaireMission.Add(matricule, new Mission(numeroMission, nom, DateTime.Parse(date), int.Parse(duree), vaisseau, categorie, matricule));
+                                        
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Il n'y a pas de scientifique qui ont ce matricule");
+                                    }
                                     break;
                                 case "SU":
+                                    Console.WriteLine("Numero de la mission a suprimmer : ");
+                                    string numeroMission = Console.ReadLine();
+                                    foreach (var mission in dictionnaireMission.Values)
+                                    {
+                                        if (mission.NomMission== numeroMission)
+                                        {
+                                            dictionnaireMission.Remove(mission);
+                                        }
+                                    }
                                     break;
                                 case "Q":
                                     ConnexionUtilisateur(id);
@@ -434,6 +485,12 @@ namespace Tp_Finale
                             }
                             break;
                         case "SI":
+                            Console.WriteLine("Catégorie pour faire la simulation : ");
+                            Console.Write("Catégorie 1 : ");
+                            string categorie1=Console.ReadLine();
+                            Console.Write("Catégorie 2 : ");
+                            string categorie2=Console.ReadLine();
+
                             break;
                         default:
                             break;
