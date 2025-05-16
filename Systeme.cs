@@ -19,6 +19,8 @@ namespace Tp_Finale
         public static Dictionary<string, List<string>> dictionnaireInstruments { get; set; } = new Dictionary<string, List<string>>();
         public static Dictionary<string, Mission> dictionnaireMission { get; set; } = new Dictionary<string, Mission>();
         public static Dictionary<string, List<string>> dictionnaireNouveauUtilisateur { get; set; } = new Dictionary<string, List<string>>();
+        public static ObjetCeleste objet { get; set; }
+
 
         public static void ChargerDonnees()
         {
@@ -199,7 +201,6 @@ namespace Tp_Finale
             foreach (var ligne in File.ReadLines("ObjetMission.csv"))
             {
                 string[] valeurs = ligne.Split(';');
-                ObjetCeleste objet;
 
                 if (valeurs[6] == "" && valeurs[7] == "")
                 {
@@ -692,10 +693,21 @@ namespace Tp_Finale
                             break;
                         case "SI":
                             Console.WriteLine("Catégorie pour faire la simulation : ");
-                            Console.Write("Catégorie 1 : ");
+                            Console.Write("Catégorie 1 (Étoile,Satelitte,Planète) : ");
                             string categorie1=Console.ReadLine();
+                            if (categorie1 == "Planète" || categorie1 == "Satelitte" || categorie1 == "Étoile")
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Catégorie invalide !");
+                                Console.WriteLine("Entrer de nouveau la catégorie ou revenez au menu (M)");
+                                Console.Write("Votre choix --->");
+                            }
                             Console.Write("Catégorie 2 : ");
                             string categorie2=Console.ReadLine();
+                            
 
                             break;
                         default:
@@ -902,6 +914,10 @@ namespace Tp_Finale
                     }
                 }
             }
+        }
+        public double GetDonneesCalcul()
+        {
+            return 3.0;
         }
     }
 }
