@@ -53,7 +53,11 @@ namespace Tp_Finale
                             listeObservateur.Add(valeurs[2]); // Deviens date naissance en 1
 
                             // Ajouter au dictionnaire
-                            Systeme.dictionnaire.Add(cleValeur, listeObservateur);
+                            if (!dictionnaire.ContainsKey(cleValeur))
+                            {
+                                Systeme.dictionnaire.Add(cleValeur, listeObservateur);
+
+                            }
 
                         }
                         if (valeurs[5]!="")
@@ -692,22 +696,73 @@ namespace Tp_Finale
                             } while (true);
                             break;
                         case "SI":
+                            string categorie1 = "";
+                            string categorie2 = "";
                             Console.WriteLine("Catégorie pour faire la simulation : ");
-                            Console.Write("Catégorie 1 (Étoile,Satelitte,Planète) : ");
-                            string categorie1=Console.ReadLine();
-                            if (categorie1 == "Planète" || categorie1 == "Satelitte" || categorie1 == "Étoile")
-                            {
+                            recommencer = true;
+                            do {
+                                Console.Write("Catégorie 1 (Étoile,Satelitte,Planète) : ");
+                                categorie1 = Console.ReadLine();
+                                if (categorie1 == "Planète" || categorie1 == "Satelitte" || categorie1 == "Étoile")
+                                {
 
-                            }
-                            else
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Catégorie invalide !");
+                                    Console.WriteLine("Entrer de nouveau la catégorie ou revenez au menu (M)");
+                                    Console.Write("Votre choix --->");
+                                    categorie1 = Console.ReadLine();
+                                    if (categorie1 == "M")
+                                    {
+                                        ConnexionUtilisateur(id);
+                                    }
+                                    else
+                                    {
+                                        recommencer = true;
+                                    }
+                                }
+                            }while(recommencer==true);
+                            recommencer = true;
+                            do
                             {
-                                Console.WriteLine("Catégorie invalide !");
-                                Console.WriteLine("Entrer de nouveau la catégorie ou revenez au menu (M)");
-                                Console.Write("Votre choix --->");
+                                Console.Write("Catégorie 1 (Étoile,Satelitte,Planète) : ");
+                                categorie2 = Console.ReadLine();
+                                if (categorie2 == "Planète" || categorie2 == "Satelitte" || categorie2 == "Étoile")
+                                {
+
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Catégorie invalide !");
+                                    Console.WriteLine("Entrer de nouveau la catégorie ou revenez au menu (M)");
+                                    Console.Write("Votre choix --->");
+                                    categorie2 = Console.ReadLine();
+                                    if (categorie2 == "M")
+                                    {
+                                        ConnexionUtilisateur(id);
+                                    }
+                                    else
+                                    {
+                                        recommencer = true;
+                                    }
+                                }
+                            } while (recommencer == true);
+                            int i = 0;
+                            int j = 0;
+                            foreach (var item in dictionnaireMission.Values)
+                            {
+                                if(item.Destination.ToString() == categorie1)
+                                {
+                                    i = i + 1;
+                                }
+                                else if (item.Destination.ToString() == categorie2)
+                                {
+                                    j = j + 1;
+                                }
                             }
-                            Console.Write("Catégorie 2 : ");
-                            string categorie2=Console.ReadLine();
-                            
+                            Console.WriteLine($"Il y a {i} missions pour la catégorie {categorie1}");
+                            Console.WriteLine($"Il y a {j} missions pour la catégorie {categorie2}");
 
                             break;
                         default:
