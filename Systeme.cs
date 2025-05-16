@@ -331,45 +331,93 @@ namespace Tp_Finale
                             {
                                 Console.WriteLine("Erreur, ce n'est pas une chaine de caractère");
                             }
-                            if(choix == "O")
+                            if (choix == "O")
                             {
-                                Console.Write("Numéro de l'identification : ");
-                                string matricule = Console.ReadLine();
-                                Console.Write("Nom : ");
-                                string noom = Console.ReadLine();
-                                Console.Write("Prenom : ");
-                                string prenoom = Console.ReadLine();
-                                Console.Write("Date naissance : ");
-                                string dateNaissance = Console.ReadLine();
-                                scientifique.AjouterObservateur(new Observateur(matricule, noom, prenoom, DateTime.Parse(dateNaissance)));
-                                List<string> liste = new List<string>();
-                                liste.Add(noom);
-                                liste.Add(prenom);
-                                liste.Add(dateNaissance);
-                                Systeme.dictionnaire.Add(matricule, liste);
+                                recommencer = true;
+                                do
+                                {
+                                    Console.Write("Numéro de l'identification : ");
+                                    string matricule = Console.ReadLine();
+                                    Console.Write("Nom : ");
+                                    string noom = Console.ReadLine();
+                                    Console.Write("Prenom : ");
+                                    string prenoom = Console.ReadLine();
+                                    Console.Write("Date naissance : ");
+                                    string dateNaissance = Console.ReadLine();
+                                    scientifique.AjouterObservateur(new Observateur(matricule, noom, prenoom, DateTime.Parse(dateNaissance)));
+                                    List<string> liste = new List<string>();
+                                    liste.Add(noom);
+                                    liste.Add(prenom);
+                                    liste.Add(dateNaissance);
+                                    if (!dictionnaire.ContainsKey(matricule))
+                                    {
+                                        Systeme.dictionnaire.Add(matricule, liste);
+                                        Console.WriteLine("Observateur Créé");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Il y a déja un observateur avec ce numéro");
+                                    }
+                                    Console.WriteLine();
+                                    Console.WriteLine("Re crééer un observateur (O)");
+                                    Console.WriteLine("Menu principale (M)");
+                                    Console.WriteLine("Votre choix ---->");
+                                    choix = Console.ReadLine();
+                                    if (choix == "S")
+                                    {
+                                        recommencer = true;
+                                    }
+                                    else
+                                    {
+                                        ConnexionUtilisateur(id);
+                                    }
+                                } while (recommencer == true);
                             }
                             else if (choix == "S")
                             {
-                                Console.Write("Numéro de matricule : ");
-                                string matricule = Console.ReadLine();
-                                Console.Write("Nom : ");
-                                string noom = Console.ReadLine();
-                                Console.Write("Prenom : ");
-                                string prenoom = Console.ReadLine();
-                                Console.Write("Date naissance : ");
-                                string dateNaissance = Console.ReadLine();
-                                scientifique.AjouterScientifique(new Scientifique(matricule,noom,prenoom,DateTime.Parse(dateNaissance)));
-                                List<string>liste=new List<string>();
-                                liste.Add(noom);
-                                liste.Add(prenom);
-                                liste.Add(dateNaissance);
-                                Systeme.dictionnaire.Add(matricule, liste);
-                            }
-                            else if(choix == "Q")
-                            {
-                                ConnexionUtilisateur(id);
-                            }
+                                recommencer = true;
+                                do {
+                                    Console.Write("Numéro de matricule : ");
+                                    string matricule = Console.ReadLine();
+                                    Console.Write("Nom : ");
+                                    string noom = Console.ReadLine();
+                                    Console.Write("Prenom : ");
+                                    string prenoom = Console.ReadLine();
+                                    Console.Write("Date naissance : ");
+                                    string dateNaissance = Console.ReadLine();
+                                    scientifique.AjouterScientifique(new Scientifique(matricule, noom, prenoom, DateTime.Parse(dateNaissance)));
+                                    List<string> liste = new List<string>();
+                                    liste.Add(noom);
+                                    liste.Add(prenom);
+                                    liste.Add(dateNaissance);
+                                    if (!dictionnaire.ContainsKey(matricule))
+                                    {
+                                        Systeme.dictionnaire.Add(matricule, liste);
+                                        Console.WriteLine("Scientifique créé avec succès !");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Il y a déja un scientifique avec ce matricule ");
+                                    }
+                                    Console.WriteLine("Re crééer un scientifique (S)");
+                                    Console.WriteLine("Menu principale (M)");
+                                    Console.WriteLine("Votre choix ---->");
+                                    choix = Console.ReadLine();
+                                    if (choix == "S")
+                                    {
+                                        recommencer = true;
+                                    }
+                                    else
+                                    {
+                                        ConnexionUtilisateur(id);
+                                    }
+                                } while (recommencer == true);
 
+                            }
+                            else if (choix == "Q")
+                                {
+                                    ConnexionUtilisateur(id);
+                                }
                             break;
                         case "GO":
                             Console.WriteLine("Gestion des objets : ");
@@ -411,117 +459,206 @@ namespace Tp_Finale
                             }
                             break;
                         case "GM":
-                            Console.WriteLine("Gestion des missions : ");
-                            Console.WriteLine();
-                            Console.WriteLine("Ajouter une mission (AM)");
-                            Console.WriteLine("Suprimmer une mission (SU)");
-                            Console.WriteLine("Quitter (Q)");
-                            Console.WriteLine();
-                            Console.Write("Votre choix ----> ");
-                            choix = Console.ReadLine();
-                            switch (choix)
+                            bool grosseBoucle = true;
+                            do
                             {
-                                case "AM":
-                                    Console.Write("Numéro du scientifique pour l'ajout de la mission : ");
-                                    string matricule = Console.ReadLine();
-                                    if (dictionnaire.ContainsKey(matricule) == true)
-                                    {
-                                        Console.Write("Nom de la mission : ");
-                                        nom = Console .ReadLine();
-                                        Console.Write("Numéro de référence de la mission");
-                                        string numeroMission1 = Console .ReadLine();
-                                        Console.Write("Catégorie de la mission : ");
-                                        string categorie = Console .ReadLine();
-                                        Console.Write("Vaisseau spatial  : ");
-                                        string vaisseau = Console .ReadLine();
-                                        Console.Write("Durée estimée : ");
-                                        string duree = Console .ReadLine();
-                                        Console.Write("Date de lancement : ");
-                                        string date = Console .ReadLine();
-                                        dictionnaireMission.Add(matricule, new Mission(numeroMission1, nom, DateTime.Parse(date), int.Parse(duree), vaisseau, categorie, matricule));
-                                        
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Il n'y a pas de scientifique qui ont ce matricule");
-                                    }
-                                    break;
-                                case "SU":
-                                    Console.WriteLine("Numero de la mission a suprimmer : ");
-                                    string numeroMission = Console.ReadLine();
-                                    foreach (var mission in dictionnaireMission.Values)
-                                    {
-                                        if (mission.NomMission== numeroMission)
+                                Console.WriteLine("Gestion des missions : ");
+                                Console.WriteLine();
+                                Console.WriteLine("Ajouter une mission (AM)");
+                                Console.WriteLine("Suprimmer une mission (SU)");
+                                Console.WriteLine("Quitter (Q)");
+                                Console.WriteLine();
+                                Console.Write("Votre choix ----> ");
+                                choix = Console.ReadLine();
+                                switch (choix)
+                                {
+                                    case "AM":
+                                        bool boucle = true;
+                                        do
                                         {
-                                            string lalal = dictionnaireMission[mission.NomMission].Matricule;
-                                            dictionnaireMission.Remove(lalal);
-                                            Console.WriteLine("Mission suprimmé de la base de donnés");
+                                            Console.Write("Numéro du scientifique pour l'ajout de la mission : ");
+                                            string matricule = Console.ReadLine();
+                                            if (dictionnaire.ContainsKey(matricule) == true)
+                                            {
+                                                Console.Write("Nom de la mission : ");
+                                                nom = Console.ReadLine();
+                                                Console.Write("Numéro de référence de la mission");
+                                                string numeroMission1 = Console.ReadLine();
+                                                Console.Write("Catégorie de la mission : ");
+                                                string categorie = Console.ReadLine();
+                                                Console.Write("Vaisseau spatial  : ");
+                                                string vaisseau = Console.ReadLine();
+                                                Console.Write("Durée estimée : ");
+                                                string duree = Console.ReadLine();
+                                                Console.Write("Date de lancement : ");
+                                                string date = Console.ReadLine();
+                                                dictionnaireMission.Add(matricule, new Mission(numeroMission1, nom, DateTime.Parse(date), int.Parse(duree), vaisseau, categorie, matricule));
+
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Il n'y a pas de scientifique qui a ce matricule");
+                                                Console.WriteLine("Entrer de nouveau une mission (E) ");
+                                                Console.WriteLine("Revenir au menu (M)");
+                                                Console.Write("Votre choix ----> ");
+                                                choix = Console.ReadLine();
+                                                if (choix == "E")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    boucle = false;
+                                                }
+
+                                            }
+                                        } while (boucle == true);
+                                        break;
+                                    case "SU":
+                                        Console.WriteLine("Numero de la mission a suprimmer : ");
+                                        string numeroMission = Console.ReadLine();
+                                        if ()
+                                        foreach (var mission in dictionnaireMission.Values)
+                                        {
+                                            if (mission.NomMission == numeroMission)
+                                            {
+                                                string lalal = dictionnaireMission[mission.NomMission].Matricule;
+                                                dictionnaireMission.Remove(lalal);
+                                                Console.WriteLine("Mission suprimmé de la base de donnés");
+                                            }
                                         }
-                                    }
-                                    break;
-                                case "Q":
-                                    ConnexionUtilisateur(id);
-                                    break;
-                                default:
-                                    break;
-                            }
+                                        break;
+                                    case "Q":
+                                        ConnexionUtilisateur(id);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            } while (grosseBoucle == true);
                             break;
                         case "GI":
-                            Console.WriteLine("Gestion des instruments de mesures : ");
-                            Console.WriteLine();
-                            Console.WriteLine("Instrument d'observation (IO)");
-                            Console.WriteLine("Instrument d'analyse (IA)");
-                            Console.WriteLine("Quitter (Q)");
-                            Console.WriteLine();
-                            Console.Write("Votre choix ---> ");
-                            choix = Console.ReadLine();
-                            switch (choix)
+                            do
                             {
-                                case "IO":
-                                    Console.Write("Numéro de référence de la mission : ");
-                                    string numeroReference = Console.ReadLine();
-                                    if (dictionnaireInstruments.ContainsKey(numeroReference)==true)
-                                    {
-                                        Console.Write("Id instrument : ");
-                                        string idInstrument = Console.ReadLine();
-                                        Console.Write("Nom instrument : ");
-                                        string nomInstrument = Console.ReadLine();
-                                        Console.Write("Champs de vision : ");
-                                        string champsVision = Console.ReadLine();
-                                        Console.Write("Longueur de l'onde : ");
-                                        string longueurOnde = Console.ReadLine();
-                                        List<string> list = new List<string>();
-                                        list.Add(nomInstrument);
-                                        list.Add(champsVision);
-                                        list.Add(longueurOnde);
-                                        dictionnaireInstruments.Add(numeroReference, list);
-                                    }
-                                    
-                                    break;
-                                case "IA":
-                                    Console.Write("Numéro de référence de la mission : ");
-                                    numeroReference = Console.ReadLine();
-                                    if (dictionnaireInstruments.ContainsKey(numeroReference) == true)
-                                    {
-                                        Console.Write("Id instrument : ");
-                                        string idInstrument = Console.ReadLine();
-                                        Console.Write("Nom instrument : ");
-                                        string nomInstrument = Console.ReadLine();
-                                        Console.Write("Type de signale : ");
-                                        string typeSignal = Console.ReadLine();
-                                        
-                                        List<string> list = new List<string>();
-                                        list.Add(nomInstrument);
-                                        list.Add(typeSignal);
-                                        dictionnaireInstruments.Add(numeroReference, list);
-                                    }
-                                    break;
-                                case "Q":
-                                    ConnexionUtilisateur(id);
-                                    break;
-                                default:
-                                    break;
-                            }
+
+                                Console.WriteLine("Gestion des instruments de mesures : ");
+                                Console.WriteLine();
+                                Console.WriteLine("Instrument d'observation (IO)");
+                                Console.WriteLine("Instrument d'analyse (IA)");
+                                Console.WriteLine("Quitter (Q)");
+                                Console.WriteLine();
+                                Console.Write("Votre choix ---> ");
+                                choix = Console.ReadLine();
+                                switch (choix)
+                                {
+                                    case "IO":
+                                        bool refaire = true;
+                                        do
+                                        {
+                                            Console.Write("Numéro de référence de la mission : ");
+                                            string numeroReference = Console.ReadLine();
+                                            if (dictionnaireInstruments.ContainsKey(numeroReference) == true)
+                                            {
+                                                Console.Write("Id instrument : ");
+                                                string idInstrument = Console.ReadLine();
+                                                Console.Write("Nom instrument : ");
+                                                string nomInstrument = Console.ReadLine();
+                                                Console.Write("Champs de vision : ");
+                                                string champsVision = Console.ReadLine();
+                                                Console.Write("Longueur de l'onde : ");
+                                                string longueurOnde = Console.ReadLine();
+                                                List<string> list = new List<string>();
+                                                list.Add(nomInstrument);
+                                                list.Add(champsVision);
+                                                list.Add(longueurOnde);
+                                                dictionnaireInstruments.Add(numeroReference, list);
+                                                Console.WriteLine();
+                                                Console.WriteLine("Entrer un autre instrument (E)");
+                                                Console.WriteLine("Revenir au menu (M)");
+                                                Console.Write("Votre choix ----> ");
+                                                choix = Console.ReadLine();
+                                                if (choix == "E")
+                                                {
+                                                    refaire = true;
+                                                }
+                                                else
+                                                {
+                                                    refaire = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Aucune mission a ce numéro de référence");
+                                                Console.WriteLine("Entrer de nouveau le numéro (E)");
+                                                Console.WriteLine("Revenir au menu (M)");
+                                                choix = Console.ReadLine();
+                                                if (choix == "E")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    refaire = false;
+                                                }
+                                            }
+                                        } while (refaire == true);
+                                        break;
+                                    case "IA":
+                                        bool boucle = true;
+                                        do
+                                        {
+                                            Console.Write("Numéro de référence de la mission : ");
+                                            string numeroReference = Console.ReadLine();
+                                            if (dictionnaireInstruments.ContainsKey(numeroReference) == true)
+                                            {
+                                                Console.Write("Id instrument : ");
+                                                string idInstrument = Console.ReadLine();
+                                                Console.Write("Nom instrument : ");
+                                                string nomInstrument = Console.ReadLine();
+                                                Console.Write("Type de signale : ");
+                                                string typeSignal = Console.ReadLine();
+
+                                                List<string> list = new List<string>();
+                                                list.Add(nomInstrument);
+                                                list.Add(typeSignal);
+                                                dictionnaireInstruments.Add(numeroReference, list);
+                                                Console.WriteLine();
+                                                Console.WriteLine("Entrer un autre instrument (E)");
+                                                Console.WriteLine("Revenir au menu (M)");
+                                                Console.Write("Votre choix ----> ");
+                                                choix = Console.ReadLine();
+                                                if (choix == "E")
+                                                {
+                                                    boucle = true;
+                                                }
+                                                else
+                                                {
+                                                    boucle = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Aucune mission a ce numéro de référence");
+                                                Console.WriteLine("Entrer de nouveau le numéro (E)");
+                                                Console.WriteLine("Revenir au menu (M)");
+                                                choix = Console.ReadLine();
+                                                if (choix == "E")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    boucle = false;
+                                                }
+                                            }
+                                        } while (boucle == true);
+                                        break;
+                                    case "Q":
+                                        ConnexionUtilisateur(id);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            } while (true);
                             break;
                         case "SI":
                             Console.WriteLine("Catégorie pour faire la simulation : ");
