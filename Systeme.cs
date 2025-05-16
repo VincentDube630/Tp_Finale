@@ -21,6 +21,7 @@ namespace Tp_Finale
         public static Dictionary<string, List<string>> dictionnaireInstruments { get; set; } = new Dictionary<string, List<string>>();
         public static Dictionary<string, Mission> dictionnaireMission { get; set; } = new Dictionary<string, Mission>();
         public static Dictionary<string, List<string>> dictionnaireNouveauUtilisateur { get; set; } = new Dictionary<string, List<string>>();
+        public static Dictionary<string, List<string>> dictionnaireNouveauxInstruments{ get; set; } = new Dictionary<string, List<string>>();
         public static ObjetCeleste objet { get; set; }
 
         // Fonction pour charger les données du fichier excel
@@ -168,7 +169,7 @@ namespace Tp_Finale
             {
                 Console.WriteLine("Fichier introuvable");
             }
-            string cheminFichier2 = "ObjetMission";
+            string cheminFichier2 = "ObjetMission.csv";
             if (File.Exists(cheminFichier2))
             {
                 foreach (var ligne in File.ReadLines(cheminFichier2))
@@ -274,6 +275,7 @@ namespace Tp_Finale
             return double.Parse(input, NumberStyles.Float, CultureInfo.InvariantCulture);
         }
 
+       
         // Sauvergarder les missions en mémoire
         public static void SauvegarderMission(Mission mission)
         {
@@ -282,11 +284,37 @@ namespace Tp_Finale
            
                 using (StreamWriter fichier= new StreamWriter(cheminFichier, append: true))
                 {
-                    fichier.WriteLine($"Mission,{mission.referenceMission},{mission.NomMission},{mission.DateLancement:yyyy-MM-dd},{mission.DureeEstimee},{mission.VaisseauSpatial},{mission.Destination},{mission.Matricule}");
+                    fichier.WriteLine($"Mission {mission.NomMission};{mission.referenceMission};{mission.Matricule};{mission.Destination};{mission.VaisseauSpatial};{mission.DateLancement:yyyy-MM-dd};{mission.DureeEstimee}");
                 }
             
         }
-        
+
+        // Sauvegarder les instruments en mémoire 
+        static void SauvegarderListe()
+        {
+            string cheminFichier = "IntrusmentMesures.csv";
+            using (StreamWriter writer = new StreamWriter(cheminFichier, true))
+            {
+                foreach(var nouveau in Systeme.dictionnaireNouveauxInstruments)
+                {
+                    string id = nouveau.Key;
+                    List<string> list = nouveau.Value;
+
+                    string ligne = "";
+                    if (list.Count == 2)
+                    {
+                        //Ajout instrument d'analyse
+                        ligne = $"{id};{list[0]};{list[1]}";
+                    }
+                    else
+                    {
+                        ligne = $"{id};{list[0]};{list[1]}{list[2]}";
+
+                    }
+                }
+            }
+        }
+
         // Sauvergarder les nouveaux scientifiques et observateurs en mémoire
         public void SauvegarderDonneesScientifique()
         {
@@ -683,6 +711,7 @@ namespace Tp_Finale
                                                 list.Add(longueurOnde);
                                                 // Ajouter l'instrument au dictionnaire
                                                 dictionnaireInstruments.Add(numeroReference, list);
+                                                dictionnaireNouveauxInstruments.Add(numeroReference, list);
                                                 // Demander de rentrer un autre instrument ou de revenir au menu
                                                 Console.WriteLine();
                                                 Console.WriteLine("Entrer un autre instrument (E)");
@@ -739,6 +768,7 @@ namespace Tp_Finale
                                                 list.Add(typeSignal);
                                                 // Ajouter l'instrument au dictionnaire
                                                 dictionnaireInstruments.Add(numeroReference, list);
+                                                dictionnaireNouveauxInstruments.Add(numeroReference, list);
 
                                                 // Demander de re créer un instrument ou revenir au menu principslr
                                                 Console.WriteLine();
@@ -1105,7 +1135,7 @@ namespace Tp_Finale
                                     // Revenir au menu pricipale en appuyant sur une touche
                                     Console.WriteLine();
                                     Console.WriteLine();
-                                    Console.Write("Revenir au menu princiaple : ( appuyer sur une touche et faite enter)");
+                                    Console.Write("Revenir au menu princiaple : ( appuyer sur une touche et faite enter )");
                                     string revenir = Console.ReadLine();
                                     ConnexionUtilisateur(id);
                                 }
