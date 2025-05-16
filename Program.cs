@@ -6,45 +6,49 @@
         {
             Systeme systeme = new Systeme();
             Systeme.ChargerDonnees();
-            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-            Console.WriteLine("                         Simulation des \n                         missions spatiales");
-            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-            Console.WriteLine();
-            Console.WriteLine("Choissisez une option : ");
-            Console.WriteLine("Observateur (O)");
-            Console.WriteLine("Scientifique (S)");
-            Console.WriteLine("Quitter (Q)");
-            Console.WriteLine();
-            string choix = Console.ReadLine();
-            switch (choix)
+            do
             {
-                case "O":
-                    Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-                    Console.WriteLine("                         Simulation des \n                         missions spatiales");
-                    Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-                    Console.WriteLine();
-                    Console.WriteLine("Option observateur : ");
-                    Console.Write("Veuillez fournir le numéro d'identification ----> ");
-                    string id1 = Console.ReadLine();
-                    systeme.ConnexionUtilisateur(id1);
-                    break;
-                case "S":
-                    Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-                    Console.WriteLine("                         Simulation des \n                         missions spatiales");
-                    Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-                    Console.WriteLine();
-                    Console.WriteLine("Option scientifique : ");
-                    Console.Write("Veuillez fournir le numéro matricule ----> ");
-                    string id2 = Console.ReadLine();
-                    systeme.ConnexionUtilisateur(id2);
-                    break;
-                case "Q":
-                    Environment.ExitCode = 0;
-                    break;
-                default:
-                    Console.WriteLine("Choix invalide!");
-                    break;
-            }
+                Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                Console.WriteLine("                         Simulation des \n                         missions spatiales");
+                Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                Console.WriteLine();
+                Console.WriteLine("Choissisez une option : ");
+                Console.WriteLine("Observateur (O)");
+                Console.WriteLine("Scientifique (S)");
+                Console.WriteLine("Quitter (Q)");
+                Console.WriteLine();
+                string choix = Console.ReadLine();
+                switch (choix)
+                {
+                    case "O":
+                        Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                        Console.WriteLine("                         Simulation des \n                         missions spatiales");
+                        Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                        Console.WriteLine();
+                        Console.WriteLine("Option observateur : ");
+                        Console.Write("Veuillez fournir le numéro d'identification ----> ");
+                        string id1 = Console.ReadLine();
+                        systeme.ConnexionUtilisateur(id1);
+                        break;
+                    case "S":
+                        Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                        Console.WriteLine("                         Simulation des \n                         missions spatiales");
+                        Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                        Console.WriteLine();
+                        Console.WriteLine("Option scientifique : ");
+                        Console.Write("Veuillez fournir le numéro matricule ----> ");
+                        string id2 = Console.ReadLine();
+                        systeme.ConnexionUtilisateur(id2);
+                        break;
+                    case "Q":
+                        Environment.ExitCode = 0;
+                        break;
+                    default:
+                        Console.WriteLine("Choix invalide!");
+                        break;
+
+                }
+            } while (true);
         }
     }
 }

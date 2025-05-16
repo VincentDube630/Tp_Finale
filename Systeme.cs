@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -244,6 +245,21 @@ namespace Tp_Finale
             if (dictionnaire.ContainsKey(id) == false)
             {
                 Console.WriteLine("Aucune correspondance trouvé");
+                Console.WriteLine("Re rentrer le numéro (R)");
+                Console.WriteLine("Menu principale (MP)");
+                string choix1 = Console.ReadLine();
+                switch (choix1)
+                {
+                    case "R":
+                        Console.Write("Numéro : ");
+                        id = Console.ReadLine();
+                        ConnexionUtilisateur(id);
+                        break;
+                    case "MP":
+                        break;
+                    default:
+                        break;
+                }
             }
             else
             {
@@ -434,6 +450,7 @@ namespace Tp_Finale
                     Console.WriteLine("Recherche un scientifique (RS) : ");
                     Console.WriteLine("Liste des scientifiques (LS) : ");
                     Console.WriteLine("Liste des instruments de mesure (LI) : ");
+                    Console.Write("Votre choix ----> ");
                     string mo = "";
                     bool recommencer = true;
                     do
