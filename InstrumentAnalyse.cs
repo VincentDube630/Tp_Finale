@@ -15,6 +15,7 @@ namespace Tp_Finale
         // Afficher les infos
         public void AfficherInfo()
         {
+            base.AfficherInfo();
             Console.WriteLine($"Type de signale : {TypeSignale}");
         }
     }

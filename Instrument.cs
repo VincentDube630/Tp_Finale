@@ -21,5 +21,9 @@ namespace Tp_Finale
             this.NomInstrument = nomInstrument;
             this.Categorie = Categorie;
         }
+        public virtual void AfficherInfo()
+        {
+            Console.WriteLine($"Nom : {NomInstrument}");
+        }
     }
 }

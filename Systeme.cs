@@ -112,7 +112,7 @@ namespace Tp_Finale
             {
                 Console.WriteLine("Fichier introuvable");
             }
-            string cheminFichier1="InstrumentMesures";
+            string cheminFichier1="IntrusmentMesures.csv";
             // Si le fichier "InstrumentMesures" existe alors commencer la lecture
             if (File.Exists(cheminFichier1))
             {
@@ -952,7 +952,6 @@ namespace Tp_Finale
 
                                 }
                             }while(true);
-                            break;
                             // Si le choix est "LM"
                         case "LM":
                             // créer une liste
@@ -1056,22 +1055,15 @@ namespace Tp_Finale
                                 }
                             }
 
-                                break;
+                            break;
                         case "LI":
                             // Si le choix est "LI"
                             recommencer = true;
                             
                             // Demander le numéro de référence 
                             Console.WriteLine("Numéro de référence : ");
-                            numeroReference = "";
-                            try
-                            {
-                                numeroReference = Console.ReadLine();
-                            }
-                            catch (FormatException)
-                            {
-                                Console.WriteLine("Ce n'est pas le bon format!");
-                            }
+                            numeroReference = Console.ReadLine();
+                            
                             do
                             {
                                 // Si il est false l'indiquer et appuyer sur une touche pour revenir au menu principale
@@ -1091,21 +1083,33 @@ namespace Tp_Finale
                                 else
                                 {
                                     List<string> valeurs1 = dictionnaireInstruments[numeroReference];
-                                    if (valeurs1[3] != "")
+                                    // try pour obtenir l'erreur ArgumentOutOfRangeException si la valeur1[2] n'est pas dans la liste
+                                    try
                                     {
-                                        InstrumentObservation instrumentObservation2 = new InstrumentObservation(numeroReference, valeurs1[1], valeurs1[2], int.Parse(valeurs1[3]));
+                                        if (valeurs1[2] != "")
+                                        {
+                                            InstrumentObservation instrumentObservation2 = new InstrumentObservation(numeroReference, valeurs1[0], valeurs1[1], int.Parse(valeurs1[2]));
+
+                                            Console.WriteLine();
+                                            Console.WriteLine("Info : ");
+                                            instrumentObservation2.AfficherInfo();
+                                        }
                                     }
-                                    else
+                                    // prendre l'exception et afficher l'instrument d'analyse
+                                    catch(ArgumentOutOfRangeException)
                                     {
-                                        InstrumentAnalyse instrumentAnalyse2 = new InstrumentAnalyse(numeroReference, valeurs1[1], valeurs1[2]);
+                                        InstrumentAnalyse instrumentAnalyse2 = new InstrumentAnalyse(numeroReference, valeurs1[0], valeurs1[1]);
+                                        instrumentAnalyse2.AfficherInfo();
                                     }
+                                    
+                                    // Revenir au menu pricipale en appuyant sur une touche
                                     Console.WriteLine();
                                     Console.WriteLine();
-                                    Console.Write("Revenir au menu princiaple : ");
+                                    Console.Write("Revenir au menu princiaple : ( appuyer sur une touche et faite enter)");
                                     string revenir = Console.ReadLine();
                                     ConnexionUtilisateur(id);
                                 }
-                             }while (recommencer == true) ;
+                            }while (recommencer == true) ;
                             break;
                         default:
 

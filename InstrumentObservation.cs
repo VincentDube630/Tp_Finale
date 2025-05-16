@@ -20,6 +20,7 @@ namespace Tp_Finale
         // Afficher les infos
         public void AfficherInfo()
         {
+            base.AfficherInfo();
             Console.WriteLine($"Champs de vision : {ChampsVision}");
             Console.WriteLine($"Longueur d'onde : {LongeurOnde}");
         } 
