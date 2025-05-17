@@ -331,12 +331,12 @@ namespace Tp_Finale
                     if (valeurs.Count == 2)
                     {
                         // Ajouter observateur
-                        ligne = $"{id};{valeurs[0]};{valeurs[1]};;;;";
+                        ligne = $"{id};{valeurs[0]} {valeurs[1]};;;;";
                     }
                     else if (valeurs.Count == 3)
                     {
                         // Ajouter scientifique
-                        ligne = $";{valeurs[0]};{valeurs[1]};{id};{valeurs[2]};;;";
+                        ligne = $"{id};{valeurs[0]} {valeurs[1]};{valeurs[2]};;;";
                     }
 
                     writer.WriteLine(ligne);
@@ -406,6 +406,8 @@ namespace Tp_Finale
                     Console.WriteLine("Gestion des missions (GM)");
                     Console.WriteLine("Gestion des instruments de mesures (GI)");
                     Console.WriteLine("Simulation des mesures (SI)");
+                    Console.WriteLine();
+                    Console.WriteLine("Quitter : ");
                     Console.Write("Choix : ");
                     string mo = "";
                     bool recommencer = true;
@@ -903,7 +905,18 @@ namespace Tp_Finale
                             // Ne fonctionne pas 
                             Console.WriteLine($"Il y a {compteur1} missions pour la catégorie {categorie1}");
                             Console.WriteLine($"Il y a {compteur2} missions pour la catégorie {categorie2}");
-
+                            Console.WriteLine();
+                            Console.WriteLine("Nom de l'objet 1 : ");
+                            string objet1 = Console.ReadLine();
+                            Console.WriteLine("Nom de l'objet 2 : ");
+                            string objet2 = Console.ReadLine();
+                            Console.WriteLine("masse de l'objet centrale : ");
+                            string masseObjetCentrale = Console.ReadLine();
+                            Console.WriteLine("Distance entre les deux distances : ");
+                            string distance = Console.ReadLine();
+                            break;
+                        case "Q":
+                            Console.WriteLine("Toutes les données ont bien été enregistrées dans les fichiers");
                             break;
                         default:
                             break;
@@ -922,6 +935,8 @@ namespace Tp_Finale
                     Console.WriteLine("Recherche un scientifique (RS) : ");
                     Console.WriteLine("Liste des scientifiques (LS) : ");
                     Console.WriteLine("Liste des instruments de mesure (LI) : ");
+                    Console.WriteLine();
+                    Console.WriteLine("Quitter (Q)");
                     Console.Write("Votre choix ----> ");
                     string mo = "";
                     bool recommencer = true;
@@ -1140,6 +1155,8 @@ namespace Tp_Finale
                                     ConnexionUtilisateur(id);
                                 }
                             }while (recommencer == true) ;
+                            break;
+                        case "Q":
                             break;
                         default:
 
