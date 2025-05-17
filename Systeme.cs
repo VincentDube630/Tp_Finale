@@ -19,6 +19,7 @@ namespace Tp_Finale
         // Déclarer l'ensemble des dictionnaires en static pour qu'ils soient accesible dans tous les classes
         public static Dictionary<string, List<string>> dictionnaire { get; set; } = new Dictionary<string, List<string>>();
         public static Dictionary<string, List<string>> dictionnaireInstruments { get; set; } = new Dictionary<string, List<string>>();
+        public static Dictionary<string, List<string>> dictionnairenouveauInstruments { get; set; } = new Dictionary<string, List<string>>();
         public static Dictionary<string, Mission> dictionnaireMission { get; set; } = new Dictionary<string, Mission>();
         public static Dictionary<string, Mission> dictionnaireNouveauMission { get; set; } = new Dictionary<string, Mission>();
         public static Dictionary<string, List<string>> dictionnaireNouveauUtilisateur { get; set; } = new Dictionary<string, List<string>>();
@@ -567,8 +568,6 @@ namespace Tp_Finale
                                     {
                                         Console.Write("Numéro d'identification de la mission : ");
                                         string numero = Console .ReadLine();
-
-                                        
                                     }
                                     else
                                     {
@@ -715,8 +714,8 @@ namespace Tp_Finale
                                                 list.Add(champsVision);
                                                 list.Add(longueurOnde);
                                                 // Ajouter l'instrument au dictionnaire
-                                                dictionnaireInstruments.Add(numeroReference, list);
                                                 dictionnaireNouveauxInstruments.Add(numeroReference, list);
+                                                SauvegarderListe();
                                                 // Demander de rentrer un autre instrument ou de revenir au menu
                                                 Console.WriteLine();
                                                 Console.WriteLine("Entrer un autre instrument (E)");
@@ -772,8 +771,8 @@ namespace Tp_Finale
                                                 list.Add(nomInstrument);
                                                 list.Add(typeSignal);
                                                 // Ajouter l'instrument au dictionnaire
-                                                dictionnaireInstruments.Add(numeroReference, list);
                                                 dictionnaireNouveauxInstruments.Add(numeroReference, list);
+                                                SauvegarderListe();
 
                                                 // Demander de re créer un instrument ou revenir au menu principslr
                                                 Console.WriteLine();
@@ -917,6 +916,7 @@ namespace Tp_Finale
                             string masseObjetCentrale = Console.ReadLine();
                             Console.WriteLine("Distance entre les deux distances : ");
                             string distance = Console.ReadLine();
+
                             break;
                         case "Q":
                             Console.WriteLine("Toutes les données ont bien été enregistrées dans les fichiers");

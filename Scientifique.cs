@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Tp_Finale
 {
-    internal class Scientifique:Utilisateur// Classe fille de Utilisateur
+    internal class Scientifique:Utilisateur // Classe fille de l'utilisateur
     {
 
-        // Déclarer des attributs propre à la classe Scientifique
+        // Déclarer des attributs propre à la classe scientifique
         public string Matricule { get; set; }
         public List<Mission> Missions { get; set; }
         Systeme systeme;
