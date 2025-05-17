@@ -20,6 +20,7 @@ namespace Tp_Finale
         public static Dictionary<string, List<string>> dictionnaire { get; set; } = new Dictionary<string, List<string>>();
         public static Dictionary<string, List<string>> dictionnaireInstruments { get; set; } = new Dictionary<string, List<string>>();
         public static Dictionary<string, Mission> dictionnaireMission { get; set; } = new Dictionary<string, Mission>();
+        public static Dictionary<string, Mission> dictionnaireNouveauMission { get; set; } = new Dictionary<string, Mission>();
         public static Dictionary<string, List<string>> dictionnaireNouveauUtilisateur { get; set; } = new Dictionary<string, List<string>>();
         public static Dictionary<string, List<string>> dictionnaireNouveauxInstruments{ get; set; } = new Dictionary<string, List<string>>();
         public static ObjetCeleste objet { get; set; }
@@ -284,7 +285,7 @@ namespace Tp_Finale
            
                 using (StreamWriter fichier= new StreamWriter(cheminFichier, append: true))
                 {
-                    fichier.WriteLine($"Mission {mission.NomMission};{mission.referenceMission};{mission.Matricule};{mission.Destination};{mission.VaisseauSpatial};{mission.DateLancement:yyyy-MM-dd};{mission.DureeEstimee}");
+                    fichier.WriteLine($"{mission.NomMission};{mission.referenceMission};{mission.Matricule};{mission.Destination};{mission.VaisseauSpatial};{mission.DureeEstimee};{mission.DateLancement:yyyy-MM-dd}");
                 }
             
         }
@@ -461,7 +462,7 @@ namespace Tp_Finale
                                     scientifique.AjouterObservateur(new Observateur(matricule, noom, prenoom, DateTime.Parse(dateNaissance)));
                                     List<string> liste = new List<string>();
                                     liste.Add(noom);
-                                    liste.Add(prenom);
+                                    liste.Add(prenoom);
                                     liste.Add(dateNaissance);
                                     if (!dictionnaire.ContainsKey(matricule))
                                     {
@@ -509,7 +510,7 @@ namespace Tp_Finale
                                     scientifique.AjouterScientifique(new Scientifique(matricule, noom, prenoom, DateTime.Parse(dateNaissance)));
                                     List<string> liste = new List<string>();
                                     liste.Add(noom);
-                                    liste.Add(prenom);
+                                    liste.Add(prenoom);
                                     liste.Add(dateNaissance);
                                     if (!dictionnaire.ContainsKey(matricule))
                                     {
@@ -626,8 +627,9 @@ namespace Tp_Finale
                                                 string date = Console.ReadLine();
                                                 // Crééer la mission et l'ajout au fichier 
                                                 Mission mission = new Mission(numeroMission1, nom, DateTime.Parse(date), int.Parse(duree), vaisseau, categorie, matricule);
-                                                dictionnaireMission.Add(matricule,mission);
+                                                dictionnaireNouveauMission.Add(matricule,mission);
                                                 SauvegarderMission(mission);
+                                                boucle = false;
                                             }
                                             // Si le matricule n'est pas bon alors l'indiquer et propser de le rentrer a nouveau ou de revenir au menu
                                             else
