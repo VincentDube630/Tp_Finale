@@ -12,13 +12,13 @@ namespace Tp_Finale
         // Constructeur pour recevoir les attributs de la classe mère
         public Planete(string scientifique,string mission,string nomObjet, string dateDebut,double masse,double rayon) : base(scientifique, mission,nomObjet, dateDebut, masse,rayon) { }
         // Redéfinir la classe CalculerVitesseGravitationelle() et CalculerVitesseOrbitale() 
-        public override void CalculerVitesseGravitationelle()
+        public override void CalculerVitesseGravitationelle(double rayon, double masse1, double masse2)
         {
-
+            Console.WriteLine($"Force gravitationelle : {0.00000000006674 * ((masse1 * masse2)) / (rayon * rayon)}");
         }
-        public override void CalculerVitesseOrbitale()
+        public override void CalculerVitesseOrbitale(double masse,double rayon)
         {
-
+            Console.WriteLine($"Vitesse orbritale : {Math.Sqrt(0.00000000006674 * masse / rayon)}"); 
         }
     }
 }

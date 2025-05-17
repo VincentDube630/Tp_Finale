@@ -558,16 +558,29 @@ namespace Tp_Finale
                             Console.WriteLine();
                             Console.Write("Votre choix ----> ");
                             choix = Console.ReadLine();
+                            string matricules;
                             switch (choix)
                             {
-                                // Je n'ai pas réussi à faire cette étape
                                 case "PL":
                                     Console.WriteLine("Numéro de matricule du scientifique : ");
-                                    string matricule = Console.ReadLine();
-                                    if (dictionnaire.ContainsKey(matricule)==true)
+                                    matricules = Console.ReadLine();
+                                    if (dictionnaire.ContainsKey(matricules))
                                     {
                                         Console.Write("Numéro d'identification de la mission : ");
-                                        string numero = Console .ReadLine();
+                                        string numero = Console.ReadLine();
+
+                                        Console.Write("Nom de la planète : ");
+                                        string nomPl = Console.ReadLine();
+                                        Console.Write("Masse : ");
+                                        double masse = double.Parse(Console.ReadLine());
+                                        Console.Write("Rayon : ");
+                                        double rayon = double.Parse(Console.ReadLine());
+                                        Console.Write("Date de lancement : ");
+                                        string date = Console.ReadLine();
+
+                                        ObjetCeleste planete = new Planete(matricules, numero, nomPl, date, masse, rayon);
+                                        dictionnaireMission[numero].Destination = planete;
+                                        Console.WriteLine("Objet céleste ajouté!");
                                     }
                                     else
                                     {
@@ -575,10 +588,68 @@ namespace Tp_Finale
                                     }
                                     break;
                                 case "ET":
+                                    {
+                                        Console.WriteLine("Numéro de matricule du scientifique : ");
+                                        matricules = Console.ReadLine();
+                                        if (dictionnaire.ContainsKey(matricules))
+                                        {
+                                            Console.Write("Numéro d'identification de la mission : ");
+                                            string numero = Console.ReadLine();
 
+                                            Console.Write("Nom de la planète : ");
+                                            string nomPl = Console.ReadLine();
+                                            Console.Write("Masse : ");
+                                            double masse = double.Parse(Console.ReadLine());
+                                            Console.Write("Rayon : ");
+                                            double rayon = double.Parse(Console.ReadLine());
+                                            Console.Write("Date de lancement : ");
+                                            string date = Console.ReadLine();
+                                            Console.Write("Luminosité : ");
+                                            double luminosite = double.Parse(Console.ReadLine());
+
+                                            ObjetCeleste etoile = new Etoile(matricules, numero, nomPl, date, masse, rayon, luminosite);
+                                            dictionnaireMission[numero].Destination = etoile;
+                                            Console.WriteLine("Objet céleste ajouté!");
+
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Il n'y a pas de scientifique qui correspond à ce matricule ");
+                                        }
+                                    }
                                     break;
                                 case "SA":
+                                    {
+                                        Console.WriteLine("Numéro de matricule du scientifique : ");
+                                        matricules = Console.ReadLine();
+                                        if (dictionnaire.ContainsKey(matricules))
+                                        {
+                                            Console.Write("Numéro d'identification de la mission : ");
+                                            string numero = Console.ReadLine();
 
+                                            Console.Write("Nom du satellite : ");
+                                            string nomPl = Console.ReadLine();
+                                            Console.Write("Masse : ");
+                                            double masse = double.Parse(Console.ReadLine());
+                                            Console.Write("Rayon : ");
+                                            double rayon = double.Parse(Console.ReadLine());
+                                            Console.Write("Date de lancement : ");
+                                            string date = Console.ReadLine();
+                                            Console.Write("Altitude : ");
+                                            double altitude = double.Parse(Console.ReadLine());
+                                            Console.Write("Vitesse orbitale : ");
+                                            double vOrbitale = double.Parse(Console.ReadLine());
+
+                                            ObjetCeleste satellite = new Satellite(matricules, numero, nomPl, date, masse, rayon, altitude, vOrbitale);
+                                            dictionnaireMission[numero].Destination = satellite;
+                                            Console.WriteLine("Objet céleste ajouté!");
+
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Il n'y a pas de scientifique qui correspond à ce matricule ");
+                                        }
+                                    }
                                     break;
                                 case "Q":
                                     ConnexionUtilisateur(id);
@@ -916,6 +987,12 @@ namespace Tp_Finale
                             string masseObjetCentrale = Console.ReadLine();
                             Console.WriteLine("Distance entre les deux distances : ");
                             string distance = Console.ReadLine();
+                            Console.WriteLine("Masse objet 1 : ");
+                            string masse1 = Console.ReadLine();
+                            Console.WriteLine("Masse objet 2 : ");
+                            string masse2 = Console.ReadLine();
+                            
+                            
 
                             break;
                         case "Q":
@@ -1156,6 +1233,7 @@ namespace Tp_Finale
                                     Console.Write("Revenir au menu princiaple : ( appuyer sur une touche et faite enter )");
                                     string revenir = Console.ReadLine();
                                     ConnexionUtilisateur(id);
+
                                 }
                             }while (recommencer == true) ;
                             break;

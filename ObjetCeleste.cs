@@ -27,7 +27,7 @@ namespace Tp_Finale
             DateDebut = dateDebut;
             Rayon = rayon;
         }
-        public abstract void CalculerVitesseGravitationelle();
-        public abstract void CalculerVitesseOrbitale();
+        public abstract void CalculerVitesseGravitationelle(double rayon,double masse1,double masse2);
+        public abstract void CalculerVitesseOrbitale(double masse,double rayon);
     }
 }

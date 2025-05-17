@@ -20,11 +20,11 @@ namespace Tp_Finale
         }
         // Redéfinir la classe CalculerVitesseGravitationelle() et CalculerVitesseOrbitale() 
 
-        public override void CalculerVitesseGravitationelle()
+        public override void CalculerVitesseGravitationelle(double rayon, double masse1, double masse2)
         {
             
         }
-        public override void CalculerVitesseOrbitale()
+        public override void CalculerVitesseOrbitale(double masse, double rayon)
         {
 
         }
